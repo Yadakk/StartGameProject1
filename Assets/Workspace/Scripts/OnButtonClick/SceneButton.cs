@@ -10,12 +10,6 @@ public class SceneButton : OnButtonClick
 
     void Start()
     {
-        AddListener(LoadScene);
-    }
-
-    public void LoadScene()
-    {
-        if (LoadingScreen != null) LoadingScreen.SetActive(true);
-        SceneManager.LoadScene(SceneName);
+        AddListener(() => SceneChanger.LoadScene(SceneName, LoadingScreen));
     }
 }
