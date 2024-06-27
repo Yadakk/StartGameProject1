@@ -524,6 +524,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 740396823051118597, guid: 4bc6445fe9c6a934980075601fc1f392, type: 3}
   m_PrefabInstance: {fileID: 1085747481}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1085747483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3447548998511114908, guid: 4bc6445fe9c6a934980075601fc1f392, type: 3}
+  m_PrefabInstance: {fileID: 1085747481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe18dc1a591de542b3e24c29c57d976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1085987908
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +659,34 @@ PrefabInstance:
       propertyPath: Pauser
       value: 
       objectReference: {fileID: 1085987910}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1085747483}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameSaver, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049281110124899511, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2916499890316341103, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: m_Name
       value: Canvas
