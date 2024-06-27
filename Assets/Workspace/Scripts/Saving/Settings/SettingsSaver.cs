@@ -12,7 +12,7 @@ public class SettingsSaver : MonoBehaviour
 
     private static readonly string _fileName = "Settings";
 
-    private void OnApplicationQuit() => Save();
+    private void OnDestroy() => Save();
 
     private void Start() => Load();
 

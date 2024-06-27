@@ -21,14 +21,14 @@ public class TabSelector : MonoBehaviour
 
     public void SelectTab(int index)
     {
-        if (_selectedTab < 0) HideAll();
+        if (index < 0) HideAll();
         else if (index == _selectedTab) ToggleTab();
         else SetTab(index);
     }
 
     private void SetTab(int index)
     {
-        transform.GetChild(_selectedTab).gameObject.SetActive(false);
+        if (_selectedTab > -1) transform.GetChild(_selectedTab).gameObject.SetActive(false);
         transform.GetChild(index).gameObject.SetActive(true);
         _selectedTab = index;
     }
