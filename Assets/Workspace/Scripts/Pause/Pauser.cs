@@ -14,7 +14,7 @@ public class Pauser : MonoBehaviour
         {
             _paused = value;
             Time.timeScale = _paused ? 0f : 1f;
-            Debug.Log(_paused);
+
             PauseUI.SetActive(_paused);
         }
     }

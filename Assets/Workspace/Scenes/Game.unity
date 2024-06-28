@@ -585,6 +585,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4100192070926709964, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
   m_PrefabInstance: {fileID: 7221629832718442740}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1846210832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6284213908998183353, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1846210836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846210832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9ed65686455ec4fbd677548902d34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2142406189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -671,6 +688,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1085987910}
+    - target: {fileID: 5429351365795233340, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7596141921507192800, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -752,9 +773,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2742273403965454269, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6284213908998183353, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1846210836}
   m_SourcePrefab: {fileID: 100100000, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
 --- !u!114 &7221629832718442742 stripped
 MonoBehaviour:

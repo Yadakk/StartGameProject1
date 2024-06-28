@@ -13,7 +13,7 @@ public class TransitionRelatively : MonoBehaviour
 
     private void MoveUiElement(Vector2 pos)
     {
-        RectTransform.DOAnchorPos(pos, AnimDuration).SetEase(Ease.OutBounce);
+        RectTransform.DOAnchorPos(pos, AnimDuration).SetEase(Ease.OutCubic);
     }
 
     public void Move()
