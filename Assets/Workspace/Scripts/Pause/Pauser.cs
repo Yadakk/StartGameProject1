@@ -13,7 +13,8 @@ public class Pauser : MonoBehaviour
         set
         {
             _paused = value;
-            Time.timeScale = _paused ? 1f : 0f;
+            Time.timeScale = _paused ? 0f : 1f;
+            Debug.Log(_paused);
             PauseUI.SetActive(_paused);
         }
     }
