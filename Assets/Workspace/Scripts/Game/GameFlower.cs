@@ -14,6 +14,7 @@ public class GameFlower : MonoBehaviour
     public ExpenditureCounter VipExpenditure;
     public ExpenditureCounter IncomeExpenditure;
     public ExpenditureCounter TotalExpenditure;
+    public GameObject LoadingScreen;
     public int PrinterCost = 35;
 
     public readonly UnityEvent OnNewDay = new();
@@ -43,7 +44,6 @@ public class GameFlower : MonoBehaviour
         IncomeExpenditure.Expenditure = 0;
         TotalExpenditure.Expenditure = 0;
 
-        if (CurrentDay >= MaxDays) { SceneChanger.LoadScene(WinSceneName); return; }
         _grandmasToGo = GrandmasPerDay;
         GenerateGrandma();
         CurrentDay++;
@@ -60,6 +60,8 @@ public class GameFlower : MonoBehaviour
 
     private void EndDay()
     {
+        if (CurrentDay >= MaxDays) { SceneChanger.LoadScene(WinSceneName, LoadingScreen); return; }
+
         ResultsWindow.Open();
         PlayerValues.Values.Money -= PrinterCost;
         PrinterExpenditure.Expenditure += PrinterCost;

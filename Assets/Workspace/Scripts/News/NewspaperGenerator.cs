@@ -48,7 +48,8 @@ public class NewspaperGenerator : MonoBehaviour
         FragmentGenerator.CurrentPaper = holder;
         FragmentGenerator.GenerateMany();
 
-        for (int i = 0; i < Random.Range(VipNewsMin, VipNewsMax + 1); i++)
+        if (GameFlower.CurrentDay > 1)
+            for (int i = 0; i < Random.Range(VipNewsMin, VipNewsMax + 1); i++)
             FragmentGenerator.GenerateVip();
 
         Tweener tween = paper.transform.DOLocalMove(Destination.localPosition, AnimSeconds).SetEase(Ease.OutCirc);

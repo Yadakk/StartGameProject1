@@ -16,6 +16,7 @@ public static class SceneChanger
             var tweens = DOTween.PausedTweens();
             if (tweens == null) tweens = DOTween.PlayingTweens();
             else tweens.AddRange(DOTween.PlayingTweens());
+            if (tweens == null) return;
             for (int i = 0; i < tweens.Count; i++)
                 tweens[i]?.Kill();
         }

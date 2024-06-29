@@ -377,6 +377,7 @@ MonoBehaviour:
   Values:
     _money: 0
   GameOverSceneName: GameOver
+  LoadingScreen: {fileID: 846914912}
 --- !u!114 &437962717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0efa530af4b4048859e36f5e042adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerValues: {fileID: 0}
+  PlayerValues: {fileID: 437962716}
   Generator: {fileID: 67827082}
   ResultsWindow: {fileID: 809847595}
   ThemePaperContainerParent: {fileID: 2101796034}
@@ -397,6 +398,7 @@ MonoBehaviour:
   VipExpenditure: {fileID: 1355773224}
   IncomeExpenditure: {fileID: 2093718735}
   TotalExpenditure: {fileID: 7221629832718442741}
+  LoadingScreen: {fileID: 846914912}
   PrinterCost: 35
   GrandmasPerDay: 3
   MaxDays: 3
@@ -423,6 +425,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4075b2c47c07448ab4ee43de00b89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &846914912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1405127291342743924, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &862995627
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,10 +795,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 187914949085349176, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 948549989236408274, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: Pauser
       value: 
