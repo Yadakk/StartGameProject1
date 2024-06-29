@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Generator: {fileID: 67827082}
   ResultsWindow: {fileID: 809847595}
-  GrandmasPerDay: 6
+  GrandmasPerDay: 3
   MaxDays: 3
   WinSceneName: Win
 --- !u!114 &664603077 stripped
@@ -673,17 +673,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4100192070926709964, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
   m_PrefabInstance: {fileID: 7221629832718442740}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1951713907 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5461815229867451437, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-  m_PrefabInstance: {fileID: 7221629832718442740}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e89a565e3357307468f5f78a1177d6e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2142406189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,10 +747,6 @@ PrefabInstance:
       propertyPath: Pauser
       value: 
       objectReference: {fileID: 1085987910}
-    - target: {fileID: 980236817754487013, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50.180054
-      objectReference: {fileID: 0}
     - target: {fileID: 1946186638560710062, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: PlayerValues
       value: 
@@ -774,10 +759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3613242320526565691, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5067579435035673884, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: PlayerValues
+      value: 
+      objectReference: {fileID: 437962716}
     - target: {fileID: 5177317685266389678, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -786,18 +771,6 @@ PrefabInstance:
       propertyPath: GameFlower
       value: 
       objectReference: {fileID: 437962717}
-    - target: {fileID: 5461815229867451437, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: ThemesForDay.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461815229867451437, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: ThemesForDay.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5461815229867451437, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: ThemesForDay.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7596141921507192800, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -878,22 +851,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7675201493279615930, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: FragmentDatas.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7675201493279615930, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: FragmentDatas.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 757e026ab7ced454599a3b8c48a35bfe, type: 2}
-    - target: {fileID: 7675201493279615930, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: FragmentDatas.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: f51df7aa1df575a43b6f47f9dca36148, type: 2}
-    - target: {fileID: 8398440163647268011, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
-      propertyPath: NewspaperSource
-      value: 
-      objectReference: {fileID: 1951713907}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

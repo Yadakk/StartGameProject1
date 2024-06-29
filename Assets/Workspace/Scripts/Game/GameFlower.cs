@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ public class GameFlower : MonoBehaviour
 {
     public GrandmaGenerator Generator;
     public OpenCloseWindow ResultsWindow;
+    public GameObject ThemePaperContainerParent;
 
     public readonly UnityEvent OnNewDay = new();
 
@@ -18,8 +20,12 @@ public class GameFlower : MonoBehaviour
 
     private int _grandmasToGo;
 
+    ThemePaperContainer[] _themePaperContainers;
+
     private void Start()
     {
+        _themePaperContainers = ThemePaperContainerParent.GetComponentsInChildren<ThemePaperContainer>();
+
         ResultsWindow.CloseAction = StartDay;
         StartDay();
     }
@@ -44,5 +50,10 @@ public class GameFlower : MonoBehaviour
     private void EndDay()
     {
         ResultsWindow.Open();
+
+        foreach (var item in _themePaperContainers)
+        {
+            if (item.Newspaper != null) Destroy(item.Newspaper);
+        }
     }
 }

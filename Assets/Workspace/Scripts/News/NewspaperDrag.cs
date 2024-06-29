@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(RectTransform))]
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public float DragAlpha = 0.4f;
 
@@ -32,7 +32,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         private set => _image = value;
     }
 
-    public readonly UnityEvent<Draggable> OnStartDrag = new();
+    public readonly UnityEvent<NewspaperDrag> OnStartDrag = new();
+    public readonly UnityEvent<NewspaperDrag> OnDeconstruct = new();
 
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
@@ -41,6 +42,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void Deconstruct()
+    {
+        OnDeconstruct.Invoke(this);
+        Destroy(gameObject);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

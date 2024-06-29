@@ -20,7 +20,6 @@ public class NewspaperGenerator : MonoBehaviour
 
     private void Start()
     {
-        OnNewDay();
         GameFlower.OnNewDay.AddListener(OnNewDay);
     }
 

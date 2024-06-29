@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4493588386467430490}
   - component: {fileID: 5641705720408681290}
   - component: {fileID: 937677217156670938}
+  - component: {fileID: 4866728525797956497}
   m_Layer: 0
   m_Name: Grandma
   m_TagString: Untagged
@@ -106,6 +107,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimDuration: 4
   MessageShowTime: 3
+--- !u!114 &4866728525797956497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4304978314714810396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc8aeeaecc2c9949a07b4d12c757f86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7022086806492646527
 GameObject:
   m_ObjectHideFlags: 0
