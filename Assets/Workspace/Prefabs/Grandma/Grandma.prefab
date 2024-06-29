@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimDuration: 4
+  MessageShowTime: 3
 --- !u!1 &7022086806492646527
 GameObject:
   m_ObjectHideFlags: 0

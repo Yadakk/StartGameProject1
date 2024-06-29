@@ -16,4 +16,19 @@ public class PopupTween : MonoBehaviour
     {
         transform.DOScale(Vector3.one, Duration).SetEase(Ease.OutElastic);
     }
+
+    public void Appear(TweenCallback action)
+    {
+        transform.DOScale(Vector3.one, Duration).SetEase(Ease.OutElastic).OnComplete(action);
+    }
+
+    public void Disappear()
+    {
+        transform.DOScale(Vector3.zero, Duration).SetEase(Ease.InOutQuint);
+    }
+
+    public void Disappear(TweenCallback action)
+    {
+        transform.DOScale(Vector3.zero, Duration).SetEase(Ease.InOutQuint).OnComplete(action);
+    }
 }

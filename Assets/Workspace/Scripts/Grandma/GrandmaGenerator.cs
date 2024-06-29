@@ -8,15 +8,12 @@ public class GrandmaGenerator : MonoBehaviour
     public Transform Destination;
     public Transform Exit;
 
-    private void Start()
-    {
-        Generate();
-    }
-
-    public void Generate()
+    public GameObject Generate()
     {
         var grandma = Instantiate(Prefab, transform.position, transform.rotation, transform);
-        var mover = grandma.GetComponent<MoveToPosition>();
+        var mover = grandma.GetComponent<GrandmaMoveToPosition>();
+        mover.Generator = this;
         mover.Move(Destination);
+        return grandma;
     }
 }

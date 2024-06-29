@@ -11,7 +11,8 @@ public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
     {
         if (!eventData.pointerDrag.TryGetComponent<Minipaper>(out var minipaper)) return;
         if (!IsGrandmaWaiting.IsWaiting) return;
-        IsGrandmaWaiting.IsWaiting = false;
+        var mover = IsGrandmaWaiting.GetComponentInChildren<GrandmaMoveToPosition>();
+        mover.GetPaper();
         Destroy(minipaper.gameObject);
     }
 }
