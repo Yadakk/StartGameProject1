@@ -7,7 +7,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
 {
     public GameObject MiniPaper;
     public RectTransform ThrowTo;
-    public NewspaperSource NewspaperSource;
+    public NewspaperGenerator NewspaperSource;
 
     public void OnDrop(PointerEventData eventData)
     {

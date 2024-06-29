@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6845500864948186369}
   - component: {fileID: 5346796450986918241}
   - component: {fileID: 7681649451533721269}
+  - component: {fileID: 7614518423157435923}
   m_Layer: 5
   m_Name: Newspaper
   m_TagString: Untagged
@@ -115,3 +116,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DragAlpha: 0.4
+--- !u!114 &7614518423157435923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843953394148233749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749fb1adac3d1254aa0af3a2819a2718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewspaperData: {fileID: 0}
