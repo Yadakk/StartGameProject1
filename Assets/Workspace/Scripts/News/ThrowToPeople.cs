@@ -7,12 +7,16 @@ using UnityEngine.EventSystems;
 
 public class ThrowToPeople : MonoBehaviour, IDropHandler
 {
+    public PlayerValues PlayerValues;
+    public ExpenditureCounter VipExpenditure;
+    public ExpenditureCounter TotalExpenditure;
     public RectTransform ThrowTo;
     public NewspaperGenerator NewspaperSource;
     public float SizeMultiplier = 0.3f;
     public int LowQualityCost = 10;
     public int MidQualityCost = 15;
     public int HighQualityCost = 20;
+    public int VipCost = 3;
 
     private ThemePaperContainer[] _themePaperContainers;
 
@@ -42,13 +46,20 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         {
             fragment.GetComponent<Image>().raycastTarget = false;
             if (fragment.FragmentData.Theme != holder.NewspaperData.Theme) { allThemesCorrect = false; break; }
-            if (fragment.FragmentData.IsVip) hasVipNews = true;
+            if (fragment.FragmentData.IsVip)
+            {
+                hasVipNews = true;
+                PlayerValues.Values.Money -= VipCost;
+                VipExpenditure.Expenditure += VipCost;
+                TotalExpenditure.Expenditure -= VipCost;
+            }
         }
 
         if (!allThemesCorrect) holder.Cost = LowQualityCost;
         else if (!hasVipNews) holder.Cost = MidQualityCost;
         else holder.Cost = HighQualityCost;
 
+        if (PlayerValues.Values.Money < 0) return;
         eventData.pointerDrag.transform.SetParent(selectedContainer.transform);
         eventData.pointerDrag.transform.position = selectedContainer.transform.position;
         eventData.pointerDrag.transform.localScale *= SizeMultiplier;

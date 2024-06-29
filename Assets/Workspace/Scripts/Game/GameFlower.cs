@@ -6,9 +6,15 @@ using UnityEngine.Events;
 
 public class GameFlower : MonoBehaviour
 {
+    public PlayerValues PlayerValues;
     public GrandmaGenerator Generator;
     public OpenCloseWindow ResultsWindow;
     public GameObject ThemePaperContainerParent;
+    public ExpenditureCounter PrinterExpenditure;
+    public ExpenditureCounter VipExpenditure;
+    public ExpenditureCounter IncomeExpenditure;
+    public ExpenditureCounter TotalExpenditure;
+    public int PrinterCost = 35;
 
     public readonly UnityEvent OnNewDay = new();
 
@@ -32,6 +38,11 @@ public class GameFlower : MonoBehaviour
 
     private void StartDay()
     {
+        PrinterExpenditure.Expenditure = 0;
+        VipExpenditure.Expenditure = 0;
+        IncomeExpenditure.Expenditure = 0;
+        TotalExpenditure.Expenditure = 0;
+
         if (CurrentDay >= MaxDays) { SceneChanger.LoadScene(WinSceneName); return; }
         _grandmasToGo = GrandmasPerDay;
         GenerateGrandma();
@@ -50,6 +61,9 @@ public class GameFlower : MonoBehaviour
     private void EndDay()
     {
         ResultsWindow.Open();
+        PlayerValues.Values.Money -= PrinterCost;
+        PrinterExpenditure.Expenditure += PrinterCost;
+        TotalExpenditure.Expenditure -= PrinterCost;
 
         foreach (var item in _themePaperContainers)
         {

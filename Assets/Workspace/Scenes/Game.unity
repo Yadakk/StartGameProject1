@@ -248,6 +248,17 @@ Transform:
   - {fileID: 437962715}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &348014685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3908775164147892937, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35acbb142675b0d46945f0a633fb0f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &374913334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,8 +389,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0efa530af4b4048859e36f5e042adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerValues: {fileID: 0}
   Generator: {fileID: 67827082}
   ResultsWindow: {fileID: 809847595}
+  ThemePaperContainerParent: {fileID: 2101796034}
+  PrinterExpenditure: {fileID: 348014685}
+  VipExpenditure: {fileID: 1355773224}
+  IncomeExpenditure: {fileID: 2093718735}
+  TotalExpenditure: {fileID: 7221629832718442741}
+  PrinterCost: 35
   GrandmasPerDay: 3
   MaxDays: 3
   WinSceneName: Win
@@ -668,9 +686,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseUI: {fileID: 1733881002}
+--- !u!114 &1355773224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4571562758023687763, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35acbb142675b0d46945f0a633fb0f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1733881002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4100192070926709964, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2093718735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5218159764928015571, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35acbb142675b0d46945f0a633fb0f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2101796034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9006058195261064808, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
   m_PrefabInstance: {fileID: 7221629832718442740}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2142406189
@@ -743,6 +788,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 187914949085349176, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 948549989236408274, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
       propertyPath: Pauser
       value: 
@@ -851,11 +900,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8398440163647268011, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+      propertyPath: PlayerValues
+      value: 
+      objectReference: {fileID: 437962716}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+--- !u!114 &7221629832718442741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3429299719237278533, guid: 06f14437123aec14b8170081c4a05db9, type: 3}
+  m_PrefabInstance: {fileID: 7221629832718442740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35acbb142675b0d46945f0a633fb0f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7221629832718442742 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7487992905002064183, guid: 06f14437123aec14b8170081c4a05db9, type: 3}

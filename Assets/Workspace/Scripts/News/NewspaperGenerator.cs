@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DG.Tweening;
 using System.Linq;
 
@@ -50,7 +51,7 @@ public class NewspaperGenerator : MonoBehaviour
         for (int i = 0; i < Random.Range(VipNewsMin, VipNewsMax + 1); i++)
             FragmentGenerator.GenerateVip();
 
-        paper.transform.DOLocalMove(Destination.localPosition, AnimSeconds).SetEase(Ease.OutCirc);
+        Tweener tween = paper.transform.DOLocalMove(Destination.localPosition, AnimSeconds).SetEase(Ease.OutCirc);
     }
 
     private void ClearOldFragments()
