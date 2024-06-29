@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class NewspaperGenerator : MonoBehaviour
 {
@@ -9,61 +10,56 @@ public class NewspaperGenerator : MonoBehaviour
     public Transform Destination;
     public float AnimSeconds;
     public List<NewspaperData> NewspaperDatas;
-    public int NewspapersPerDay = 3;
-    [System.NonSerialized] public int CurrentPaperIndex;
-    public int VipNewsMin = 3;
-    public int VipNewsMax = 4;
+    public List<Theme> ThemesForDay;
+    public int VipNewsMin = 1;
+    public int VipNewsMax = 2;
     public FragmentGenerator FragmentGenerator;
     public GameFlower GameFlower;
 
-    private int[] _vipsDistribution;
+    private List<Theme> _remainingThemes = new();
 
     private void Start()
     {
-        //OnNewDay();
+        OnNewDay();
         GameFlower.OnNewDay.AddListener(OnNewDay);
     }
 
     private void OnNewDay()
     {
-        _vipsDistribution = new int[Random.Range(VipNewsMin, VipNewsMax + 1)];
-
-        for (int i = 0; i < _vipsDistribution.Length; i++)
-        {
-            _vipsDistribution[i] = Random.Range(0, NewspapersPerDay);
-        }
-
-        CurrentPaperIndex = 0;
+        _remainingThemes = ThemesForDay.ToList();
         Generate();
     }
 
     public void Generate()
     {
         ClearOldFragments();
+        if (_remainingThemes.Count == 0) return;
 
         var paper = Instantiate(Prefab, transform.position, transform.rotation, transform);
         var holder = paper.GetComponent<NewspaperDataHolder>();
-        holder.NewspaperData = NewspaperDatas[Random.Range(0, NewspaperDatas.Count)];
+
+        var selectedTheme = _remainingThemes[Random.Range(0, _remainingThemes.Count)];
+        _remainingThemes.Remove(selectedTheme);
+        var themedPapers = NewspaperDatas.Where(data => data.Theme == selectedTheme).ToList();
+        holder.NewspaperData = themedPapers[Random.Range(0, themedPapers.Count)];
+
         paper.transform.SetParent(transform.parent, true);
 
         FragmentGenerator.CurrentPaper = holder;
         FragmentGenerator.GenerateMany();
 
-        for (int i = 0; i < _vipsDistribution.Length; i++)
-            if (_vipsDistribution[i] == CurrentPaperIndex)
-                FragmentGenerator.GenerateVip();
+        for (int i = 0; i < Random.Range(VipNewsMin, VipNewsMax + 1); i++)
+            FragmentGenerator.GenerateVip();
 
         paper.transform.DOLocalMove(Destination.localPosition, AnimSeconds).SetEase(Ease.OutCirc);
-        CurrentPaperIndex++;
     }
 
     private void ClearOldFragments()
     {
-        var oldFragments = transform.parent.GetComponents<FragmentDataHolder>();
-
-        foreach (var item in oldFragments)
+        for (int i = 0; i < transform.parent.childCount; i++)
         {
-            Destroy(item.gameObject);
+            var child = transform.parent.GetChild(i);
+            if (child.TryGetComponent<FragmentDataHolder>(out _)) Destroy(child.gameObject);
         }
     }
 }

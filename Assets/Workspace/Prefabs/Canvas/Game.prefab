@@ -182,9 +182,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec34d4501122cbb4a8132b1fbb581bc6, type: 2}
   - {fileID: 11400000, guid: 1200c055d405ae14ba480022b71affe1, type: 2}
   - {fileID: 11400000, guid: 64403c0eeec141b4a9890b25114aedc8, type: 2}
-  NewspapersPerDay: 3
-  VipNewsMin: 3
-  VipNewsMax: 4
+  ThemesForDay: 000000000100000002000000
+  VipNewsMin: 1
+  VipNewsMax: 2
   FragmentGenerator: {fileID: 7675201493279615930}
   GameFlower: {fileID: 0}
 --- !u!1 &877432031964500271
@@ -357,7 +357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -50.18}
+  m_AnchoredPosition: {x: 150, y: -50.180054}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2761900327814185945
@@ -1453,7 +1453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 0.000061035156}
+  m_AnchoredPosition: {x: 50, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8398440163647268011
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MiniPaper: {fileID: 3867826368296857416, guid: 67d99dc616f894444a41fa16cf544490, type: 3}
   ThrowTo: {fileID: 8825838235043330902}
-  NewspaperSource: {fileID: 0}
+  NewspaperSource: {fileID: 5461815229867451437}
 --- !u!222 &2874890855032466845
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1931,6 +1931,12 @@ MonoBehaviour:
   Prefab: {fileID: 2287741391251363940, guid: 1eb9912b2c855044f999f069bb3dd4bb, type: 3}
   FragmentDatas:
   - {fileID: 11400000, guid: 13419f006b7e21b4a80f83d343c439d2, type: 2}
+  - {fileID: 11400000, guid: 24a760574b8fcaf43a56cc884c9b6919, type: 2}
+  - {fileID: 11400000, guid: 60575e50aba5ec84398ab6ead44632f3, type: 2}
+  - {fileID: 11400000, guid: 3fbe14a2e00814a4aadc1035d7d4531b, type: 2}
+  - {fileID: 11400000, guid: fb9f83fb8accfdd4989e1d24208e8800, type: 2}
+  - {fileID: 11400000, guid: 757e026ab7ced454599a3b8c48a35bfe, type: 2}
+  - {fileID: 11400000, guid: f51df7aa1df575a43b6f47f9dca36148, type: 2}
   GenerateAcceptable: 3
   GenerateUnacceptable: 3
 --- !u!1 &7452357107620396079

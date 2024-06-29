@@ -9,9 +9,9 @@ public class FragmentGenerator : MonoBehaviour
     public NewspaperDataHolder CurrentPaper;
     public GameObject Prefab;
     public List<FragmentData> FragmentDatas;
-    public List<FragmentData> VipFragmentDatas { get => FragmentDatas.Where(data => data.IsVip).ToList(); }
+    public List<FragmentData> VipFragmentDatas { get => FragmentDatas.Where(data => data.Theme == CurrentPaper.NewspaperData.Theme && data.IsVip).ToList(); }
     public List<FragmentData> AcceptableFragmentDatas { get => FragmentDatas.Where(data => data.Theme == CurrentPaper.NewspaperData.Theme && !data.IsVip).ToList(); }
-    public List<FragmentData> UnacceptableFragmentDatas { get => FragmentDatas.Where(data => data.Theme != CurrentPaper.NewspaperData.Theme && !data.IsVip).ToList(); }
+    public List<FragmentData> FloodFragmentDatas { get => FragmentDatas.Where(data => data.Theme == Theme.Flood && !data.IsVip).ToList(); }
     public int GenerateAcceptable = 3;
     public int GenerateUnacceptable = 3;
 
@@ -30,24 +30,25 @@ public class FragmentGenerator : MonoBehaviour
                                         Random.Range(_rectTransform.rect.min.y + newsRect.rect.max.y, _rectTransform.rect.max.y - newsRect.rect.max.y));
 
         news.transform.SetParent(transform.parent, true);
-        news.GetComponent<FragmentDataHolder>().FragmentData = fragmentData;
+        var holder = news.GetComponent<FragmentDataHolder>();
+        holder.FragmentData = fragmentData;
     }
 
     public void GenerateMany()
     {
         for (int i = 0; i < GenerateAcceptable; i++)
         {
-            Generate(FragmentDatas[Random.Range(0, AcceptableFragmentDatas.Count)]);
+            Generate(AcceptableFragmentDatas[Random.Range(0, AcceptableFragmentDatas.Count)]);
         }
 
         for (int i = 0; i < GenerateUnacceptable; i++)
         {
-            Generate(FragmentDatas[Random.Range(0, UnacceptableFragmentDatas.Count)]);
+            Generate(FloodFragmentDatas[Random.Range(0, FloodFragmentDatas.Count)]);
         }
     }
 
     public void GenerateVip()
     {
-        Generate(FragmentDatas[Random.Range(0, VipFragmentDatas.Count)]);
+        Generate(VipFragmentDatas[Random.Range(0, VipFragmentDatas.Count)]);
     }
 }
