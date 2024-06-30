@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
 {
@@ -10,12 +11,28 @@ public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
     public ExpenditureCounter IncomeExpenditure;
     public ExpenditureCounter TotalExpenditure;
     public int WrongPaperCostDivision = 5;
+    public float AnimSeconds = 1f;
 
     public void OnDrop(PointerEventData eventData)
     {
         if (!eventData.pointerDrag.TryGetComponent<NewspaperDataHolder>(out var holder)) return;
         if (!IsGrandmaWaiting.IsWaiting) return;
+
+        var canvasGroup = holder.GetComponent<CanvasGroup>();
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 1f;
+
+        holder.GetComponent<NewspaperDrag>().DragEnabled = false;
+
+        holder.transform.DOScale(Vector3.zero, AnimSeconds).SetEase(Ease.InExpo);
         var mover = IsGrandmaWaiting.GetComponentInChildren<GrandmaMoveToPosition>();
+        var point = IsGrandmaWaiting.GetComponentInChildren<PaperAcceptPoint>();
+        holder.transform.DOLocalMove(point.transform.localPosition, AnimSeconds).SetEase(Ease.InExpo).OnComplete(() => GetPaper(holder, mover));
+    }
+
+    private void GetPaper(NewspaperDataHolder holder, GrandmaMoveToPosition mover)
+    {
+        
         mover.GetPaper();
 
         var grandmaHolder = IsGrandmaWaiting.GetComponentInChildren<GrandmaDataHolder>();

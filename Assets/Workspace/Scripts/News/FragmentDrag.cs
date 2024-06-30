@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 
 [RequireComponent(typeof(RectTransform))]
-public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class FragmentDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public float DragAlpha = 0.4f;
     public float BoundsAnimDuration = 1f;
@@ -45,7 +45,7 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         private set => _image = value;
     }
 
-    public readonly UnityEvent<NewsDrag> OnStartDrag = new();
+    public readonly UnityEvent<FragmentDrag> OnStartDrag = new();
 
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
@@ -72,6 +72,7 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         _rectTransform.DOKill();
         transform.SetAsLastSibling();
         _canvasGroup.blocksRaycasts = false;
@@ -81,11 +82,13 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         _rectTransform.anchoredPosition += eventData.delta / Canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.alpha = 1f;
 

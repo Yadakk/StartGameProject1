@@ -14,7 +14,6 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public ExpenditureCounter TotalExpenditure;
     public RectTransform ThrowTo;
     public NewspaperGenerator NewspaperSource;
-    public float SizeMultiplier = 0.3f;
     public int LowQualityCost = 10;
     public int MidQualityCost = 15;
     public int HighQualityCost = 20;
@@ -78,7 +77,6 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         var newpaper = Instantiate(gameObject);
         newpaper.transform.SetParent(selectedContainer.transform);
         newpaper.transform.position = selectedContainer.transform.position;
-        newpaper.transform.localScale *= SizeMultiplier;
         newpaper.transform.SetParent(selectedContainer.transform.parent);
 
         selectedContainer.Newspaper = newpaper;

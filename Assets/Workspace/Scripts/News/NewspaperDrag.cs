@@ -56,6 +56,7 @@ public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!DragEnabled || !TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         transform.DOKill();
         transform.SetAsLastSibling();
         _canvasGroup.blocksRaycasts = false;
@@ -65,12 +66,13 @@ public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!DragEnabled || !TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         _rectTransform.anchoredPosition += eventData.delta / Canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!DragEnabled) return;
+        if (!DragEnabled || !TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.alpha = 1f;
 

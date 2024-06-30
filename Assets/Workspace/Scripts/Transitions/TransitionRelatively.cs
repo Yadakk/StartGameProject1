@@ -10,6 +10,7 @@ public class TransitionRelatively : MonoBehaviour
     public float AnimDuration;
 
     private static bool _canTrigger = true;
+    public static bool CanTrigger { get => _canTrigger; set => _canTrigger = value; }
 
     private void MoveUiElement(Vector2 pos)
     {
@@ -18,15 +19,15 @@ public class TransitionRelatively : MonoBehaviour
 
     public void Move()
     {
-        if (!_canTrigger) return;
+        if (!CanTrigger) return;
         StartCoroutine(Cooldown());
         MoveUiElement(RectTransform.anchoredPosition + RectTransform.rect.max * MoveMultiplier * 2);
     }
 
     private IEnumerator Cooldown()
     {
-        _canTrigger = false;
+        CanTrigger = false;
         yield return new WaitForSeconds(AnimDuration);
-        _canTrigger = true;
+        CanTrigger = true;
     }
 }
