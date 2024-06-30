@@ -22,12 +22,7 @@ public class NewspaperGenerator : MonoBehaviour
 
     private List<Theme> _remainingThemes = new();
 
-    private void Start()
-    {
-        GameFlower.OnNewDay.AddListener(OnNewDay);
-    }
-
-    private void OnNewDay()
+    public void StartPrinting()
     {
         _remainingThemes = ThemesForDay.ToList();
         Generate();

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameFlower : MonoBehaviour
 {
     public PlayerValues PlayerValues;
+    public GameSaver Saver;
     public GrandmaGenerator Generator;
     public OpenCloseWindow ResultsWindow;
     public GameObject ThemePaperContainerParent;
@@ -15,6 +17,7 @@ public class GameFlower : MonoBehaviour
     public ExpenditureCounter IncomeExpenditure;
     public ExpenditureCounter TotalExpenditure;
     public GameObject LoadingScreen;
+    public NewspaperGenerator NewspaperGenerator;
     public int PrinterCost = 35;
 
     public readonly UnityEvent OnNewDay = new();
@@ -23,7 +26,7 @@ public class GameFlower : MonoBehaviour
     public int MaxDays = 3;
     public string WinSceneName;
 
-    public int CurrentDay { get; private set; }
+    public int CurrentDay { get; set; }
 
     private int _grandmasToGo;
 
@@ -34,11 +37,11 @@ public class GameFlower : MonoBehaviour
         _themePaperContainers = ThemePaperContainerParent.GetComponentsInChildren<ThemePaperContainer>();
 
         ResultsWindow.CloseAction = StartDay;
-        StartDay();
     }
 
-    private void StartDay()
+    public void StartDay()
     {
+        PlayerValues.Values.MoneyForSaving = PlayerValues.Values.Money;
         PrinterExpenditure.Expenditure = 0;
         VipExpenditure.Expenditure = 0;
         IncomeExpenditure.Expenditure = 0;
@@ -48,6 +51,7 @@ public class GameFlower : MonoBehaviour
         GenerateGrandma();
         CurrentDay++;
         OnNewDay.Invoke();
+        NewspaperGenerator.StartPrinting();
     }
 
     private void GenerateGrandma()
@@ -60,7 +64,7 @@ public class GameFlower : MonoBehaviour
 
     private void EndDay()
     {
-        if (CurrentDay >= MaxDays) { SceneChanger.LoadScene(WinSceneName, LoadingScreen); return; }
+        if (CurrentDay >= MaxDays) { Saver.Delete(); SceneChanger.LoadScene(WinSceneName, LoadingScreen); return; }
 
         PlayerValues.Values.Money -= PrinterCost;
         PrinterExpenditure.Expenditure += PrinterCost;

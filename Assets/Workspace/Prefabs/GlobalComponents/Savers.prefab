@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 740396823051118597}
   - component: {fileID: 8222512526181590543}
-  - component: {fileID: 7085626477319177356}
   - component: {fileID: 3447548998511114908}
   m_Layer: 0
   m_Name: Savers
@@ -49,19 +48,6 @@ MonoBehaviour:
   SliderSettings:
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &7085626477319177356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8118752344307163598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257fef9a8afa3664b84d255173c748eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectedSave: 0
 --- !u!114 &3447548998511114908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,4 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe18dc1a591de542b3e24c29c57d976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedSaveSaver: {fileID: 7085626477319177356}
+  PlayerValues: {fileID: 0}
+  GameFlower: {fileID: 0}
+  FirstDayPopup: {fileID: 0}
+  InjectData: 1
