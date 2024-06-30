@@ -10,6 +10,7 @@ public class Newspaper : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (eventData.pointerDrag.TryGetComponent<Newspaper>(out _)) return;
         if (!TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
         if (AttachedNews.Count >= 3) return;
         var newsDrag = eventData.pointerDrag.GetComponent<FragmentDrag>();

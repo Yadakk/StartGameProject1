@@ -185,8 +185,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2756076693338792376, guid: 94999a28d03ef5a42ab658f94356c470, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756076693338792376, guid: 94999a28d03ef5a42ab658f94356c470, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756076693338792376, guid: 94999a28d03ef5a42ab658f94356c470, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -321.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756076693338792376, guid: 94999a28d03ef5a42ab658f94356c470, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 469.79016
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 3211082300952150532, guid: 94999a28d03ef5a42ab658f94356c470, type: 3}
       propertyPath: LoadingScreen
