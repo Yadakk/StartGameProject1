@@ -46,7 +46,11 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
 
         foreach (var fragment in attachedFragments)
         {
-            fragment.GetComponent<Image>().raycastTarget = false;
+            fragment.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+
+        foreach (var fragment in attachedFragments)
+        {
             if (fragment.FragmentData.Theme != holder.NewspaperData.Theme) { allThemesCorrect = false; break; }
             if (fragment.FragmentData.IsVip)
             {

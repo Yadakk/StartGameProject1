@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Celebrities 2
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 589ba85d87812e24a9d7baa9aad2cff1, type: 3}
-  Theme: 0
+  Theme: 1
   IsVip: 0

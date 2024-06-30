@@ -31,6 +31,7 @@ public class FragmentGenerator : MonoBehaviour
     {
         GameObject news = Instantiate(Prefab, transform);
         var newsRect = news.GetComponent<RectTransform>();
+        newsRect.sizeDelta *= fragmentData.Sprite.bounds.extents;
         newsRect.anchoredPosition = new(Random.Range(RectTransform.rect.min.x + newsRect.rect.max.x, RectTransform.rect.max.x - newsRect.rect.max.x),
                                         Random.Range(RectTransform.rect.min.y + newsRect.rect.max.y, RectTransform.rect.max.y - newsRect.rect.max.y));
 

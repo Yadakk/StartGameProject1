@@ -59,13 +59,11 @@ public class FragmentDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void Attach()
     {
-        Image.color = Color.green;
         _isAttached = true;
     }
 
     public void Detach()
     {
-        Image.color = Color.white;
         transform.SetParent(transform.parent.parent);
         _isAttached = false;
     }

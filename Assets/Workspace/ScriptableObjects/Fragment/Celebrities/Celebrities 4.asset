@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d4308d694aa2744b0d24e26175a1cf, type: 3}
   m_Name: Celebrities 4
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  Theme: 0
+  Sprite: {fileID: 21300000, guid: 40ce0d25e5d6cc546bdd91875ef3ecef, type: 3}
+  Theme: 1
   IsVip: 0

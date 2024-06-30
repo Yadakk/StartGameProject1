@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -485.0001, y: -0}
-  m_SizeDelta: {x: 853.1099, y: 703.1726}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3178281116664397660
 CanvasRenderer:
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DragAlpha: 0.4
   BoundsAnimDuration: 1
+  DragEnabled: 1
 --- !u!114 &7614518423157435923
 MonoBehaviour:
   m_ObjectHideFlags: 0

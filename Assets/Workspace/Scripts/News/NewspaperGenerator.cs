@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
 using System.Linq;
@@ -40,6 +41,7 @@ public class NewspaperGenerator : MonoBehaviour
         var paper = Instantiate(Prefab, transform.position, transform.rotation, transform);
         var holder = paper.GetComponent<NewspaperDataHolder>();
         var drag = paper.GetComponent<NewspaperDrag>();
+        var rect = paper.GetComponent<RectTransform>();
 
         drag.Bounds = Bounds;
         var selectedTheme = _remainingThemes[Random.Range(0, _remainingThemes.Count)];
@@ -48,6 +50,8 @@ public class NewspaperGenerator : MonoBehaviour
         holder.NewspaperData = themedPapers[Random.Range(0, themedPapers.Count)];
 
         paper.transform.SetParent(transform.parent, true);
+
+        rect.sizeDelta *= holder.NewspaperData.Sprite.bounds.extents;
 
         FragmentGenerator.CurrentPaper = holder;
         FragmentGenerator.GenerateMany();

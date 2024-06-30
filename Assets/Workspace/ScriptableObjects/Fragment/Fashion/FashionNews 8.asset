@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e720d08adea964a89c86b75b7e8c0d, type: 3}
-  m_Name: New NewspaperData 1
+  m_Script: {fileID: 11500000, guid: d5d4308d694aa2744b0d24e26175a1cf, type: 3}
+  m_Name: FashionNews 8
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  Theme: 1
+  Sprite: {fileID: 21300000, guid: 1c464fd371493294ab49e3b01deb2385, type: 3}
+  Theme: 2
+  IsVip: 0

@@ -14,6 +14,7 @@ public class NewspaperDataHolder : MonoBehaviour
     private void Start()
     {
         _image = GetComponent<Image>();
+
         _image.sprite = NewspaperData.Sprite;
     }
 }
