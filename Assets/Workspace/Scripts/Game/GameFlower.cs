@@ -62,10 +62,13 @@ public class GameFlower : MonoBehaviour
     {
         if (CurrentDay >= MaxDays) { SceneChanger.LoadScene(WinSceneName, LoadingScreen); return; }
 
-        ResultsWindow.Open();
         PlayerValues.Values.Money -= PrinterCost;
         PrinterExpenditure.Expenditure += PrinterCost;
         TotalExpenditure.Expenditure -= PrinterCost;
+
+        if (PlayerValues.Values.Money < 0) return;
+
+        ResultsWindow.Open();
 
         foreach (var item in _themePaperContainers)
         {

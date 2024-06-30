@@ -67,9 +67,9 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         eventData.pointerDrag.GetComponent<CanvasGroup>().alpha = 1f;
         eventData.pointerDrag.GetComponent<NewspaperDrag>().DragEnabled = false;
         var gameObject = eventData.pointerDrag;
-        eventData.pointerDrag.transform.DOLocalMoveX(ThrowDestination.localPosition.x, AnimDuration).SetEase(Ease.InExpo).OnComplete(() => AddPaperToShelves(gameObject, selectedContainer));
-
         NewspaperSource.Generate();
+        eventData.pointerDrag.transform.SetAsLastSibling();
+        eventData.pointerDrag.transform.DOLocalMoveX(ThrowDestination.localPosition.x, AnimDuration).SetEase(Ease.InExpo).OnComplete(() => AddPaperToShelves(gameObject, selectedContainer));
     }
 
     private void AddPaperToShelves(GameObject gameObject, ThemePaperContainer selectedContainer)
