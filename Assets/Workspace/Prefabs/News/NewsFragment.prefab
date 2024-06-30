@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DragAlpha: 0.7
+  BoundsAnimDuration: 1
 --- !u!225 &1446166196997473425
 CanvasGroup:
   m_ObjectHideFlags: 0

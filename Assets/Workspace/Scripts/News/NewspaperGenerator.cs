@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class NewspaperGenerator : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class NewspaperGenerator : MonoBehaviour
     public int VipNewsMax = 2;
     public FragmentGenerator FragmentGenerator;
     public GameFlower GameFlower;
+    public RectTransform Bounds;
 
     private List<Theme> _remainingThemes = new();
 
@@ -37,7 +39,9 @@ public class NewspaperGenerator : MonoBehaviour
 
         var paper = Instantiate(Prefab, transform.position, transform.rotation, transform);
         var holder = paper.GetComponent<NewspaperDataHolder>();
+        var drag = paper.GetComponent<NewspaperDrag>();
 
+        drag.Bounds = Bounds;
         var selectedTheme = _remainingThemes[Random.Range(0, _remainingThemes.Count)];
         _remainingThemes.Remove(selectedTheme);
         var themedPapers = NewspaperDatas.Where(data => data.Theme == selectedTheme).ToList();

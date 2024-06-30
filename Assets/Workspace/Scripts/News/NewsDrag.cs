@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 [RequireComponent(typeof(RectTransform))]
 public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public float DragAlpha = 0.4f;
+    public float BoundsAnimDuration = 1f;
 
     private Canvas _canvas;
     public Canvas Canvas 
@@ -19,6 +21,17 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             return _canvas;
         }
         private set => _canvas = value; 
+    }
+
+    private RectTransform _canvasRect;
+    public RectTransform CanvasRect
+    {
+        get
+        {
+            if (_canvasRect == null) _canvasRect = Canvas.GetComponent<RectTransform>();
+            return _canvasRect;
+        }
+        private set => _canvasRect = value;
     }
 
     private Image _image;
@@ -36,6 +49,7 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
+    private bool _isAttached;
 
     private void Start()
     {
@@ -46,16 +60,19 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void Attach()
     {
         Image.color = Color.green;
+        _isAttached = true;
     }
 
     public void Detach()
     {
         Image.color = Color.white;
         transform.SetParent(transform.parent.parent);
+        _isAttached = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        _rectTransform.DOKill();
         transform.SetAsLastSibling();
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.alpha = DragAlpha;
@@ -71,5 +88,9 @@ public class NewsDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.alpha = 1f;
+
+        if (_isAttached) return;
+
+        _rectTransform.KeepFullyInRect(CanvasRect, BoundsAnimDuration);
     }
 }

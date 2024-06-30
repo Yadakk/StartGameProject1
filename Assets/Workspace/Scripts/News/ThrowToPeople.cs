@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine.EventSystems;
 
 public class ThrowToPeople : MonoBehaviour, IDropHandler
 {
     public PlayerValues PlayerValues;
+    public Transform ThrowDestination;
     public ExpenditureCounter VipExpenditure;
     public ExpenditureCounter TotalExpenditure;
     public RectTransform ThrowTo;
@@ -17,6 +19,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public int MidQualityCost = 15;
     public int HighQualityCost = 20;
     public int VipCost = 3;
+    public float AnimDuration = 1f;
 
     private ThemePaperContainer[] _themePaperContainers;
 
@@ -60,13 +63,24 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         else holder.Cost = HighQualityCost;
 
         if (PlayerValues.Values.Money < 0) return;
-        eventData.pointerDrag.transform.SetParent(selectedContainer.transform);
-        eventData.pointerDrag.transform.position = selectedContainer.transform.position;
-        eventData.pointerDrag.transform.localScale *= SizeMultiplier;
-        eventData.pointerDrag.transform.SetParent(selectedContainer.transform.parent);
 
-        selectedContainer.Newspaper = eventData.pointerDrag;
+        eventData.pointerDrag.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        eventData.pointerDrag.GetComponent<CanvasGroup>().alpha = 1f;
+        eventData.pointerDrag.GetComponent<NewspaperDrag>().DragEnabled = false;
+        var gameObject = eventData.pointerDrag;
+        eventData.pointerDrag.transform.DOLocalMoveX(ThrowDestination.localPosition.x, AnimDuration).SetEase(Ease.InExpo).OnComplete(() => AddPaperToShelves(gameObject, selectedContainer));
 
         NewspaperSource.Generate();
+    }
+
+    private void AddPaperToShelves(GameObject gameObject, ThemePaperContainer selectedContainer)
+    {
+        var newpaper = Instantiate(gameObject);
+        newpaper.transform.SetParent(selectedContainer.transform);
+        newpaper.transform.position = selectedContainer.transform.position;
+        newpaper.transform.localScale *= SizeMultiplier;
+        newpaper.transform.SetParent(selectedContainer.transform.parent);
+
+        selectedContainer.Newspaper = newpaper;
     }
 }

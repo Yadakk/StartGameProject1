@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DragAlpha: 0.4
+  BoundsAnimDuration: 1
 --- !u!114 &7614518423157435923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NewspaperData: {fileID: 0}
+  Cost: 0

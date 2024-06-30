@@ -4,11 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 [RequireComponent(typeof(RectTransform))]
 public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public float DragAlpha = 0.4f;
+    [System.NonSerialized] public RectTransform Bounds;
+    public float BoundsAnimDuration = 1f;
+    public bool DragEnabled = true;
 
     private Canvas _canvas;
     public Canvas Canvas 
@@ -52,6 +56,7 @@ public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        transform.DOKill();
         transform.SetAsLastSibling();
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.alpha = DragAlpha;
@@ -65,7 +70,12 @@ public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!DragEnabled) return;
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.alpha = 1f;
+
+        if (_rectTransform == null) return;
+        if (Bounds == null) return;
+        _rectTransform.KeepFullyInRect(Bounds, BoundsAnimDuration);
     }
 }

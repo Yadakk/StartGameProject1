@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class ThemePaperContainer : MonoBehaviour
 {
+    public RectTransform Bounds;
     public Theme Theme;
 
     private GameObject _newspaper;
@@ -13,7 +16,15 @@ public class ThemePaperContainer : MonoBehaviour
         set
         {
             _newspaper = value;
-            _newspaper.GetComponent<NewspaperDrag>().OnDeconstruct.AddListener(OnPaperDeconstruct);
+            var drag = _newspaper.GetComponent<NewspaperDrag>();
+            var canvasGroup = _newspaper.GetComponent<CanvasGroup>();
+
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 1f;
+            drag.GetComponent<NewspaperDrag>().DragEnabled = true;
+
+            drag.OnDeconstruct.AddListener(OnPaperDeconstruct);
+            drag.Bounds = Bounds;
         }
     }
 
@@ -22,9 +33,6 @@ public class ThemePaperContainer : MonoBehaviour
         var newpaper = Instantiate(newspaper.gameObject, transform.position, transform.rotation, transform);
         newpaper.transform.SetParent(transform.parent, true);
 
-        var canvasGroup = newpaper.GetComponent<CanvasGroup>();
-        canvasGroup.blocksRaycasts = true;
-        canvasGroup.alpha = 1f;
         Newspaper = newpaper;
     }
 }
