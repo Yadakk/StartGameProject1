@@ -11,6 +11,7 @@ public class FragmentDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 {
     public float DragAlpha = 0.4f;
     public float BoundsAnimDuration = 1f;
+    public AudioSource AudioSource;
 
     private Canvas _canvas;
     public Canvas Canvas 
@@ -71,6 +72,8 @@ public class FragmentDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
+
+        AudioSource.PlayOneShot(AudioSource.clip);
         _rectTransform.DOKill();
         transform.SetAsLastSibling();
         _canvasGroup.blocksRaycasts = false;

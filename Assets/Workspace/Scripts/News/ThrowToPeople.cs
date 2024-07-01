@@ -14,6 +14,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public ExpenditureCounter TotalExpenditure;
     public RectTransform ThrowTo;
     public NewspaperGenerator NewspaperSource;
+    public AudioSource AudioSource;
     public int LowQualityCost = 10;
     public int MidQualityCost = 15;
     public int HighQualityCost = 20;
@@ -32,6 +33,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         if (!eventData.pointerDrag.TryGetComponent<NewspaperDataHolder>(out var holder)) return;
 
         ThemePaperContainer selectedContainer = null;
+        AudioSource.PlayOneShot(AudioSource.clip);
 
         for (int i = 0; i < _themePaperContainers.Length; i++)
         {

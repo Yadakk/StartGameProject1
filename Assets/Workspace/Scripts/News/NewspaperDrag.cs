@@ -13,6 +13,7 @@ public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [System.NonSerialized] public RectTransform Bounds;
     public float BoundsAnimDuration = 1f;
     public bool DragEnabled = true;
+    public AudioSource AudioSource;
 
     private Canvas _canvas;
     public Canvas Canvas 
@@ -57,6 +58,7 @@ public class NewspaperDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!DragEnabled || !TransitionRelatively.CanTrigger || Time.timeScale == 0) return;
+        AudioSource.PlayOneShot(AudioSource.clip);
         transform.DOKill();
         transform.SetAsLastSibling();
         _canvasGroup.blocksRaycasts = false;

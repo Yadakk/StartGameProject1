@@ -17,6 +17,7 @@ public class GrandmaGenerator : MonoBehaviour
         mover.Generator = this;
         mover.Move(Destination);
         holder.GrandmaData = GrandmaDatas[Random.Range(0, GrandmaDatas.Count)];
+        mover.SetSprites();
         return grandma;
     }
 }

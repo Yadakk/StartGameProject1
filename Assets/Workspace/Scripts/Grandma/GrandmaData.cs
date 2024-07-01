@@ -6,6 +6,8 @@ using UnityEngine;
 public class GrandmaData : ScriptableObject
 {
     public Sprite Sprite;
+    public Sprite AngrySprite;
     public Sprite TextboxSprite;
+    public Sprite AngryTextboxSprite;
     public Theme Theme;
 }

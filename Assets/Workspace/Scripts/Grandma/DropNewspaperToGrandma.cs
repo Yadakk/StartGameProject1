@@ -32,15 +32,14 @@ public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
 
     private void GetPaper(NewspaperDataHolder holder, GrandmaMoveToPosition mover)
     {
-        
-        mover.GetPaper();
-
         var grandmaHolder = IsGrandmaWaiting.GetComponentInChildren<GrandmaDataHolder>();
         bool reduceMoney = grandmaHolder.GrandmaData.Theme != holder.NewspaperData.Theme;
         var income = reduceMoney ? holder.Cost / WrongPaperCostDivision : holder.Cost;
         PlayerValues.Values.Money += income;
         IncomeExpenditure.Expenditure += income;
         TotalExpenditure.Expenditure += income;
+
+        mover.GetPaper(reduceMoney);
 
         holder.GetComponent<NewspaperDrag>().Deconstruct();
     }

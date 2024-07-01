@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
 
 public class GrandmaMoveToPosition : MonoBehaviour
 {
+    public GrandmaDataHolder Holder;
     [System.NonSerialized] public GrandmaGenerator Generator;
     public float AnimDuration;
     public float MessageShowTime;
+    public Vector2 DefaultSize = new(100, 100);
+    public Vector2 DefaultSizeGrandma = new(100, 100);
 
     public readonly UnityEvent OnGrandmaExit = new();
 
@@ -32,6 +36,58 @@ public class GrandmaMoveToPosition : MonoBehaviour
             return _popupTween;
         }
         set => _popupTween = value;
+    }
+
+    private Image _popupImage;
+    public Image PopupImage
+    {
+        get
+        {
+            if (_popupImage == null) _popupImage = PopupTween.GetComponent<Image>();
+            return _popupImage;
+        }
+        set => _popupImage = value;
+    }
+
+    private RectTransform _popupRect;
+    public RectTransform PopupRect
+    {
+        get
+        {
+            if (_popupRect == null) _popupRect = PopupTween.GetComponent<RectTransform>();
+            return _popupRect;
+        }
+        set => _popupRect = value;
+    }
+
+    private RectTransform _rect;
+    public RectTransform Rect
+    {
+        get
+        {
+            if (_rect == null) _rect = GetComponent<RectTransform>();
+            return _rect;
+        }
+        set => _rect = value;
+    }
+
+    private Image _image;
+    public Image Image
+    {
+        get
+        {
+            if (_image == null) _image = GetComponent<Image>();
+            return _image;
+        }
+        set => _image = value;
+    }
+
+    public void SetSprites()
+    {
+        Image.sprite = Holder.GrandmaData.Sprite;
+        PopupImage.sprite = Holder.GrandmaData.TextboxSprite;
+        PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
+        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents;
     }
 
     public void Move(Transform destination)
@@ -61,15 +117,29 @@ public class GrandmaMoveToPosition : MonoBehaviour
         gameObject.GetComponentInParent<IsGrandmaWaiting>().IsWaiting = true;
     }
 
-    public void GetPaper()
+    public void GetPaper(bool isAngry)
     {
-        PopupTween.Disappear(EndMessage);
+        if (isAngry)
+        {
+            PopupTween.Disappear(EndMessage);
 
-        gameObject.GetComponentInParent<IsGrandmaWaiting>().IsWaiting = false;
+            gameObject.GetComponentInParent<IsGrandmaWaiting>().IsWaiting = false;
+        }
+        else
+        {
+            PopupTween.Disappear(GoToExit);
+            gameObject.GetComponentInParent<IsGrandmaWaiting>().IsWaiting = false;
+        }
     }
 
     private void EndMessage()
     {
+        Image.sprite = Holder.GrandmaData.AngrySprite;
+        PopupImage.sprite = Holder.GrandmaData.AngryTextboxSprite;
+
+        PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
+        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents;
+
         PopupTween.Appear(() => StartCoroutine(EndMessageDisappear()));
     }
 
