@@ -40,7 +40,7 @@ public class ThemePaperContainer : MonoBehaviour
     private void OnPaperDeconstruct(NewspaperDrag newspaper)
     {
         var newpaper = Instantiate(newspaper.gameObject, transform.position, transform.rotation, transform);
-        newpaper.transform.SetParent(transform.parent, true);
+        newpaper.transform.SetParent(Bounds, true);
 
         Newspaper = newpaper;
     }

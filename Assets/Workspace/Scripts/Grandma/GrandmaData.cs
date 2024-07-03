@@ -10,4 +10,5 @@ public class GrandmaData : ScriptableObject
     public Sprite TextboxSprite;
     public Sprite AngryTextboxSprite;
     public Theme Theme;
+    public float DownOffset = 60f;
 }

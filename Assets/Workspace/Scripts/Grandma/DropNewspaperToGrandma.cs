@@ -12,6 +12,8 @@ public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
     public ExpenditureCounter TotalExpenditure;
     public int WrongPaperCostDivision = 5;
     public float AnimSeconds = 1f;
+    public PopupTutorial OldPopupTutorial;
+    public PopupTutorial FailPopupTutorial;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -35,6 +37,10 @@ public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
         var grandmaHolder = IsGrandmaWaiting.GetComponentInChildren<GrandmaDataHolder>();
         bool reduceMoney = grandmaHolder.GrandmaData.Theme != holder.NewspaperData.Theme;
         var income = reduceMoney ? holder.Cost / WrongPaperCostDivision : holder.Cost;
+
+        OldPopupTutorial.Disappear();
+        if (reduceMoney) FailPopupTutorial.Appear();
+
         PlayerValues.Values.Money += income;
         IncomeExpenditure.Expenditure += income;
         TotalExpenditure.Expenditure += income;

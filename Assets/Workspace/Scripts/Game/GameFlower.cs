@@ -17,6 +17,7 @@ public class GameFlower : MonoBehaviour
     public ExpenditureCounter TotalExpenditure;
     public GameObject LoadingScreen;
     public NewspaperGenerator NewspaperGenerator;
+    public PopupTutorial VipTutorialStart;
     public int PrinterCost = 35;
 
     public readonly UnityEvent OnNewDay = new();
@@ -25,7 +26,7 @@ public class GameFlower : MonoBehaviour
     public int MaxDays = 3;
     public string WinSceneName;
 
-    public int CurrentDay { get; set; }
+    public int CurrentDay { get; set; } = 1;
 
     private int _grandmasToGo;
 
@@ -40,7 +41,6 @@ public class GameFlower : MonoBehaviour
 
     public void StartDay()
     {
-        PlayerValues.Values.MoneyForSaving = PlayerValues.Values.Money;
         PrinterExpenditure.Expenditure = 0;
         VipExpenditure.Expenditure = 0;
         IncomeExpenditure.Expenditure = 0;
@@ -48,9 +48,10 @@ public class GameFlower : MonoBehaviour
 
         _grandmasToGo = GrandmasPerDay;
         GenerateGrandma();
-        CurrentDay++;
         OnNewDay.Invoke();
         NewspaperGenerator.StartPrinting();
+
+        if (CurrentDay == 2) VipTutorialStart.Appear();
     }
 
     private void GenerateGrandma()
@@ -63,7 +64,12 @@ public class GameFlower : MonoBehaviour
 
     private void EndDay()
     {
-        if (CurrentDay >= MaxDays) { Saver.Delete(); SceneChanger.LoadScene(WinSceneName, LoadingScreen); return; }
+        if (CurrentDay >= MaxDays) 
+        { 
+            Saver.Delete();
+            SceneChanger.LoadScene(WinSceneName, LoadingScreen);
+            return; 
+        }
 
         PlayerValues.Values.Money -= PrinterCost;
         PrinterExpenditure.Expenditure += PrinterCost;
@@ -77,5 +83,9 @@ public class GameFlower : MonoBehaviour
         {
             if (item.Newspaper != null) Destroy(item.Newspaper);
         }
+
+        CurrentDay++;
+        PlayerValues.Values.MoneyForSaving = PlayerValues.Values.Money;
+        Saver.Save();
     }
 }

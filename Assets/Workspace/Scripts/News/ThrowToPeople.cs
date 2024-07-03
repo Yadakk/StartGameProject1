@@ -15,6 +15,11 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public RectTransform ThrowTo;
     public NewspaperGenerator NewspaperSource;
     public AudioSource AudioSource;
+    public PopupTutorial PopupTutorialOld;
+    public PopupTutorial PopupTutorialOld2;
+    public PopupTutorial PopupTutorialOld3;
+    public PopupTutorial PopupTutorial;
+    public PopupTutorial LowQualityPopupTutorial;
     public int LowQualityCost = 10;
     public int MidQualityCost = 15;
     public int HighQualityCost = 20;
@@ -31,6 +36,11 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         if (!eventData.pointerDrag.TryGetComponent<NewspaperDataHolder>(out var holder)) return;
+
+        PopupTutorialOld.Disappear();
+        PopupTutorialOld2.Disappear();
+        PopupTutorialOld3.Disappear();
+        PopupTutorial.Appear();
 
         ThemePaperContainer selectedContainer = null;
         AudioSource.PlayOneShot(AudioSource.clip);
@@ -51,19 +61,21 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
             fragment.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
-        foreach (var fragment in attachedFragments)
-        {
-            if (fragment.FragmentData.Theme != holder.NewspaperData.Theme) { allThemesCorrect = false; break; }
-            if (fragment.FragmentData.IsVip)
+        if (attachedFragments.Length < 3) allThemesCorrect = false;
+        else
+            foreach (var fragment in attachedFragments)
             {
-                hasVipNews = true;
-                PlayerValues.Values.Money -= VipCost;
-                VipExpenditure.Expenditure += VipCost;
-                TotalExpenditure.Expenditure -= VipCost;
+                if (fragment.FragmentData.Theme != holder.NewspaperData.Theme) { allThemesCorrect = false; break; }
+                if (fragment.FragmentData.IsVip)
+                {
+                    hasVipNews = true;
+                    PlayerValues.Values.Money -= VipCost;
+                    VipExpenditure.Expenditure += VipCost;
+                    TotalExpenditure.Expenditure -= VipCost;
+                }
             }
-        }
 
-        if (!allThemesCorrect) holder.Cost = LowQualityCost;
+        if (!allThemesCorrect) { holder.Cost = LowQualityCost; LowQualityPopupTutorial.Appear(); }
         else if (!hasVipNews) holder.Cost = MidQualityCost;
         else holder.Cost = HighQualityCost;
 
@@ -83,7 +95,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         var newpaper = Instantiate(gameObject);
         newpaper.transform.SetParent(selectedContainer.transform);
         newpaper.transform.position = selectedContainer.transform.position;
-        newpaper.transform.SetParent(selectedContainer.transform.parent);
+        newpaper.transform.SetParent(selectedContainer.Bounds);
 
         selectedContainer.Newspaper = newpaper;
     }

@@ -12,6 +12,7 @@ public class ExposedMixerSlider : MonoBehaviour
 
     private void Start()
     {
+        SetVolume(Slider.value);
         Slider.onValueChanged.AddListener(SetVolume);
     }
 

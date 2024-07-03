@@ -6,9 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(RectTransform))]
 public class FragmentGenerator : MonoBehaviour
 {
-    public NewspaperDataHolder CurrentPaper;
+    [System.NonSerialized] public NewspaperDataHolder CurrentPaper;
+    public Transform KeepZone;
     public GameObject Prefab;
     public List<FragmentData> FragmentDatas;
+
     public List<FragmentData> VipFragmentDatas { get => FragmentDatas.Where(data => data.Theme == CurrentPaper.NewspaperData.Theme && data.IsVip).ToList(); }
     public List<FragmentData> AcceptableFragmentDatas { get => FragmentDatas.Where(data => data.Theme == CurrentPaper.NewspaperData.Theme && !data.IsVip).ToList(); }
     public List<FragmentData> FloodFragmentDatas { get => FragmentDatas.Where(data => data.Theme == Theme.Flood && !data.IsVip).ToList(); }
@@ -35,26 +37,36 @@ public class FragmentGenerator : MonoBehaviour
         newsRect.anchoredPosition = new(Random.Range(RectTransform.rect.min.x + newsRect.rect.max.x, RectTransform.rect.max.x - newsRect.rect.max.x),
                                         Random.Range(RectTransform.rect.min.y + newsRect.rect.max.y, RectTransform.rect.max.y - newsRect.rect.max.y));
 
-        news.transform.SetParent(transform.parent, true);
+        news.transform.SetParent(KeepZone, true);
         var holder = news.GetComponent<FragmentDataHolder>();
         holder.FragmentData = fragmentData;
     }
 
     public void GenerateMany()
     {
+        List<FragmentData> generatedDatas = new();
+
         for (int i = 0; i < GenerateAcceptable; i++)
         {
-            Generate(AcceptableFragmentDatas[Random.Range(0, AcceptableFragmentDatas.Count)]);
+            var acceptable = AcceptableFragmentDatas.Where(item => !generatedDatas.Contains(item)).ToList();
+            var data = acceptable[Random.Range(0, acceptable.Count)];
+            Generate(data);
+            generatedDatas.Add(data);
         }
 
         for (int i = 0; i < GenerateUnacceptable; i++)
         {
-            Generate(FloodFragmentDatas[Random.Range(0, FloodFragmentDatas.Count)]);
+            var acceptable = FloodFragmentDatas.Where(item => !generatedDatas.Contains(item)).ToList();
+            var data = acceptable[Random.Range(0, acceptable.Count)];
+            Generate(data);
+            generatedDatas.Add(data);
         }
     }
 
-    public void GenerateVip()
+    public FragmentData GenerateVip()
     {
-        Generate(VipFragmentDatas[Random.Range(0, VipFragmentDatas.Count)]);
+        var data = VipFragmentDatas[Random.Range(0, VipFragmentDatas.Count)];
+        Generate(data);
+        return data;
     }
 }

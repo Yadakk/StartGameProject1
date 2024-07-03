@@ -11,11 +11,6 @@ public class UpDownTween : MonoBehaviour
 
     private Sequence _mySequence;
 
-    private void Start()
-    {
-        Play();
-    }
-
     public void Stop()
     {
         _mySequence.OnStepComplete(() => _mySequence.Pause());
@@ -24,7 +19,7 @@ public class UpDownTween : MonoBehaviour
     public void Play()
     {
         _mySequence = DOTween.Sequence().SetLoops(-1, LoopType.Yoyo);
-        _mySequence.Append(transform.DOLocalMoveY(Offset, MoveSeconds).SetEase(Ease.InOutSine));
+        _mySequence.Append(transform.DOLocalMoveY(transform.localPosition.y + Offset, MoveSeconds).SetEase(Ease.InOutSine));
         _mySequence.Play();
     }
 }

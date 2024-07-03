@@ -12,6 +12,11 @@ public class TransitionRelatively : MonoBehaviour
     private static bool _canTrigger = true;
     public static bool CanTrigger { get => _canTrigger; set => _canTrigger = value; }
 
+    private void Start()
+    {
+        CanTrigger = true;
+    }
+
     private void MoveUiElement(Vector2 pos)
     {
         RectTransform.DOAnchorPos(pos, AnimDuration).SetEase(Ease.OutCubic);

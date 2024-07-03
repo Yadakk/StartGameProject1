@@ -26,7 +26,6 @@ public class SettingsSaver : MonoBehaviour
     {
         if (!JsonSaver.Load<SettingsData>(_fileName, out var loadedObject)) return;
         Data = loadedObject;
-
         for (int i = 0; i < SliderSettings.Count; i++)
         {
             SliderSettings[i].Slider.value = Data.SliderValues[i];

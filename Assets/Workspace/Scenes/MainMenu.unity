@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2787232469279738417, guid: cc273cb33db3f0e4b9c2afd3027ce809, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3655894238245327564, guid: cc273cb33db3f0e4b9c2afd3027ce809, type: 3}
       propertyPath: Pauser
       value: 

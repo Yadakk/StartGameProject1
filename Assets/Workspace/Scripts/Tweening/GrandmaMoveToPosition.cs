@@ -87,19 +87,20 @@ public class GrandmaMoveToPosition : MonoBehaviour
         Image.sprite = Holder.GrandmaData.Sprite;
         PopupImage.sprite = Holder.GrandmaData.TextboxSprite;
         PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
-        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents;
+        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents / Image.sprite.bounds.extents.y;
     }
 
     public void Move(Transform destination)
     {
         transform.SetParent(destination, true);
-        transform.DOLocalMove(destination.localPosition, AnimDuration).SetEase(Ease.InOutSine).OnComplete(Stop);
+        transform.DOLocalMove(destination.localPosition - new Vector3(0f, Holder.GrandmaData.DownOffset, 0f), AnimDuration).SetEase(Ease.InOutSine).OnComplete(Stop);
+        UpDownTween.Play();
     }
 
     public void MoveToEnd(Transform destination)
     {
         transform.SetParent(destination, true);
-        transform.DOLocalMove(destination.localPosition, AnimDuration).SetEase(Ease.InOutSine).OnComplete(Deconstruct);
+        transform.DOLocalMove(destination.localPosition - new Vector3(0f, Holder.GrandmaData.DownOffset, 0f), AnimDuration).SetEase(Ease.InOutSine).OnComplete(Deconstruct);
     }
 
     private void Deconstruct()
@@ -138,7 +139,7 @@ public class GrandmaMoveToPosition : MonoBehaviour
         PopupImage.sprite = Holder.GrandmaData.AngryTextboxSprite;
 
         PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
-        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents;
+        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents / Image.sprite.bounds.extents.y;
 
         PopupTween.Appear(() => StartCoroutine(EndMessageDisappear()));
     }
