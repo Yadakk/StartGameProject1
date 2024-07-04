@@ -381,7 +381,7 @@ MonoBehaviour:
   TotalExpenditure: {fileID: 5453634843138587569}
   LoadingScreen: {fileID: 8626752570036783488}
   NewspaperGenerator: {fileID: 3455428669958948057}
-  VipTutorialStart: {fileID: 0}
+  VipTutorialStart: {fileID: 1125572521228340359}
   PrinterCost: 35
   GrandmasPerDay: 3
   MaxDays: 3
@@ -880,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 7421214227741934954, guid: 59806dff699b1b84d8672fa6969a4921, type: 3}
       propertyPath: _clips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: e7298a8aa4dc709419ff2821d6c5ec0c, type: 3}
+      objectReference: {fileID: 8300000, guid: b4d932af2404de844be70d3c0734b56d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1599,8 +1599,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed72fc2a3320f834bb26dd1bebcfadba, type: 2}
   - {fileID: 11400000, guid: 9e5e074cf1e23ac4ba74dc263e6e1235, type: 2}
   - {fileID: 11400000, guid: 635dcad2c23d3d94b84c6950b0533904, type: 2}
+  Flower: {fileID: 437962717}
   GenerateAcceptable: 3
   GenerateUnacceptable: 3
+  GenerateVipMin: 1
+  GenerateVipMax: 2
 --- !u!224 &1074288554457551842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3353,8 +3356,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ab5b67c37b8fde47bb787c01b3ffa91, type: 2}
   - {fileID: 11400000, guid: 1046955d084861248a52f936baf7acf3, type: 2}
   ThemesForDay: 000000000100000002000000
-  VipNewsMin: 1
-  VipNewsMax: 2
   FragmentGenerator: {fileID: 1061627980225268558}
   GameFlower: {fileID: 437962717}
   Bounds: {fileID: 1599080143}

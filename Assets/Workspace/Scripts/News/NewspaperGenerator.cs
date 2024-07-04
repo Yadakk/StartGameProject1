@@ -14,8 +14,6 @@ public class NewspaperGenerator : MonoBehaviour
     public float AnimSeconds;
     public List<NewspaperData> NewspaperDatas;
     public List<Theme> ThemesForDay;
-    public int VipNewsMin = 1;
-    public int VipNewsMax = 2;
     public FragmentGenerator FragmentGenerator;
     public GameFlower GameFlower;
     public RectTransform Bounds;
@@ -57,16 +55,6 @@ public class NewspaperGenerator : MonoBehaviour
 
         FragmentGenerator.CurrentPaper = holder;
         FragmentGenerator.GenerateMany();
-
-        if (GameFlower.CurrentDay > 1)
-        {
-            List<FragmentData> generatedDatas = new();
-
-            for (int i = 0; i < Random.Range(VipNewsMin, VipNewsMax + 1); i++)
-            {
-                var data = FragmentGenerator.GenerateVip();
-            }
-        }
 
         Tweener tween = paper.transform.DOLocalMove(Destination.localPosition, AnimSeconds).SetEase(Ease.OutCirc);
     }

@@ -10,6 +10,7 @@ public class FragmentGenerator : MonoBehaviour
     public Transform KeepZone;
     public GameObject Prefab;
     public List<FragmentData> FragmentDatas;
+    public GameFlower Flower;
 
     public List<FragmentData> VipFragmentDatas { get => FragmentDatas.Where(data => data.Theme == CurrentPaper.NewspaperData.Theme && data.IsVip).ToList(); }
     public List<FragmentData> AcceptableFragmentDatas { get => FragmentDatas.Where(data => data.Theme == CurrentPaper.NewspaperData.Theme && !data.IsVip).ToList(); }
@@ -17,6 +18,8 @@ public class FragmentGenerator : MonoBehaviour
 
     public int GenerateAcceptable = 3;
     public int GenerateUnacceptable = 3;
+    public int GenerateVipMin = 1;
+    public int GenerateVipMax = 2;
 
     private RectTransform _rectTransform;
     public RectTransform RectTransform
@@ -61,12 +64,14 @@ public class FragmentGenerator : MonoBehaviour
             Generate(data);
             generatedDatas.Add(data);
         }
-    }
 
-    public FragmentData GenerateVip()
-    {
-        var data = VipFragmentDatas[Random.Range(0, VipFragmentDatas.Count)];
-        Generate(data);
-        return data;
+        if (Flower.CurrentDay > 1)
+            for (int i = 0; i < Random.Range(GenerateVipMin, GenerateVipMax + 1); i++)
+            {
+                var acceptable = VipFragmentDatas.Where(item => !generatedDatas.Contains(item)).ToList();
+                var data = acceptable[Random.Range(0, acceptable.Count)];
+                Generate(data);
+                generatedDatas.Add(data);
+            }
     }
 }
