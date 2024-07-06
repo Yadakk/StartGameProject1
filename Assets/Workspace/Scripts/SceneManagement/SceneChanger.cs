@@ -13,21 +13,27 @@ public static class SceneChanger
     {
         if (DOTween.TotalActiveTweens() > 0)
         {
-            var tweens = DOTween.PausedTweens();
-            if (tweens == null) tweens = DOTween.PlayingTweens();
-            else tweens.AddRange(DOTween.PlayingTweens());
-            if (tweens == null) return;
-            for (int i = 0; i < tweens.Count; i++)
-                tweens[i]?.Kill();
+            var pausedTweens = DOTween.PausedTweens();
+            var playingTweens = DOTween.PlayingTweens();
+
+            KillTweens(pausedTweens);
+            KillTweens(playingTweens);
         }
 
         OnSceneChangeStarted.Invoke();
         SceneManager.LoadScene(sceneName);
     }
 
+    private static void KillTweens(List<Tween> tweens)
+    {
+        if (tweens == null) return;
+        for (int i = 0; i < tweens.Count; i++)
+            tweens[i]?.Kill();
+    }
+
     public static void LoadScene(string sceneName, GameObject loadingScreen)
     {
         loadingScreen.SetActive(true);
-        SceneManager.LoadScene(sceneName);
+        LoadScene(sceneName);
     }
 }

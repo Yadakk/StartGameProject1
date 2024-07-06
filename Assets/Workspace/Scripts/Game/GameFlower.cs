@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class GameFlower : MonoBehaviour
@@ -18,7 +19,11 @@ public class GameFlower : MonoBehaviour
     public GameObject LoadingScreen;
     public NewspaperGenerator NewspaperGenerator;
     public PopupTutorial VipTutorialStart;
+    public List<Sprite> DaySprites;
+    public HideBehindRectTween DayPopup;
+    public Image DayPopupImage;
     public int PrinterCost = 35;
+    public float DayPopupShowTime = 3f;
 
     public readonly UnityEvent OnNewDay = new();
 
@@ -30,12 +35,8 @@ public class GameFlower : MonoBehaviour
 
     private int _grandmasToGo;
 
-    ThemePaperContainer[] _themePaperContainers;
-
     private void Start()
     {
-        _themePaperContainers = ThemePaperContainerParent.GetComponentsInChildren<ThemePaperContainer>();
-
         ResultsWindow.CloseAction = StartDay;
     }
 
@@ -52,6 +53,15 @@ public class GameFlower : MonoBehaviour
         NewspaperGenerator.StartPrinting();
 
         if (CurrentDay == 2) VipTutorialStart.Appear();
+
+        DayPopupImage.sprite = DaySprites[CurrentDay - 1];
+        DayPopup.Show(() => StartCoroutine(ShowDayPopup()));
+    }
+
+    private IEnumerator ShowDayPopup()
+    {
+        yield return new WaitForSeconds(DayPopupShowTime);
+        DayPopup.Hide();
     }
 
     private void GenerateGrandma()
@@ -75,17 +85,16 @@ public class GameFlower : MonoBehaviour
         PrinterExpenditure.Expenditure += PrinterCost;
         TotalExpenditure.Expenditure -= PrinterCost;
 
-        if (PlayerValues.Values.Money < 0) return;
-
         ResultsWindow.Open();
 
-        foreach (var item in _themePaperContainers)
+        foreach (var item in ThemePaperContainerParent.GetComponentsInChildren<Newspaper>())
         {
-            if (item.Newspaper != null) Destroy(item.Newspaper);
+            Destroy(item.gameObject);
         }
 
+        if (PlayerValues.Values.Money < 0) return;
+
         CurrentDay++;
-        PlayerValues.Values.MoneyForSaving = PlayerValues.Values.Money;
         Saver.Save();
     }
 }

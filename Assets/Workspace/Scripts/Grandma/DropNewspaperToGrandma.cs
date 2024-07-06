@@ -29,6 +29,9 @@ public class DropNewspaperToGrandma : MonoBehaviour, IDropHandler
         holder.transform.DOScale(Vector3.zero, AnimSeconds).SetEase(Ease.InExpo);
         var mover = IsGrandmaWaiting.GetComponentInChildren<GrandmaMoveToPosition>();
         var point = IsGrandmaWaiting.GetComponentInChildren<PaperAcceptPoint>();
+
+        IsGrandmaWaiting.IsWaiting = false;
+
         holder.transform.DOLocalMove(point.transform.localPosition, AnimSeconds).SetEase(Ease.InExpo).OnComplete(() => GetPaper(holder, mover));
     }
 

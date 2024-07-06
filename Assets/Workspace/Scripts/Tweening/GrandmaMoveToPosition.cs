@@ -123,13 +123,10 @@ public class GrandmaMoveToPosition : MonoBehaviour
         if (isAngry)
         {
             PopupTween.Disappear(EndMessage);
-
-            gameObject.GetComponentInParent<IsGrandmaWaiting>().IsWaiting = false;
         }
         else
         {
             PopupTween.Disappear(GoToExit);
-            gameObject.GetComponentInParent<IsGrandmaWaiting>().IsWaiting = false;
         }
     }
 

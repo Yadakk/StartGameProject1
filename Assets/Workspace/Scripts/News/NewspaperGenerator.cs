@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class NewspaperGenerator : MonoBehaviour
 {
@@ -20,6 +19,8 @@ public class NewspaperGenerator : MonoBehaviour
     public PopupTutorial TutorialLinkOld;
     public PopupTutorial TutorialLink;
     public PopupTutorial TutorialLink2;
+    public ThrowToPeople ThrowToPeople;
+    public PlayerValues PlayerValues;
 
     private List<Theme> _remainingThemes = new();
 
@@ -40,6 +41,8 @@ public class NewspaperGenerator : MonoBehaviour
         var rect = paper.GetComponent<RectTransform>();
         var newspaper = paper.GetComponent<Newspaper>();
 
+        newspaper.ThrowToPeople = ThrowToPeople;
+        newspaper.PlayerValues = PlayerValues;
         newspaper.TutorialLinkOld = TutorialLinkOld;
         newspaper.TutorialLink = TutorialLink;
         newspaper.TutorialLink2 = TutorialLink2;

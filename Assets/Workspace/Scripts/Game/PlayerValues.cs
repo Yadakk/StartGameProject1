@@ -5,18 +5,4 @@ using UnityEngine;
 public class PlayerValues : MonoBehaviour
 {
     public ValuesToSave Values;
-    public string GameOverSceneName;
-    public GameObject LoadingScreen;
-    public GameSaver Saver;
-
-    private void Start()
-    {
-        Values.OnMoneyLessThanZero.AddListener(OnLose);
-    }
-
-    private void OnLose()
-    {
-        Saver.Delete();
-        SceneChanger.LoadScene(GameOverSceneName, LoadingScreen);
-    }
 }

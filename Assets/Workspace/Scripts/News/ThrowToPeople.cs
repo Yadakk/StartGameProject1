@@ -20,6 +20,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public PopupTutorial PopupTutorialOld3;
     public PopupTutorial PopupTutorial;
     public PopupTutorial LowQualityPopupTutorial;
+    public PopupTutorial VipCostTutorial;
     public int LowQualityCost = 10;
     public int MidQualityCost = 15;
     public int HighQualityCost = 20;
@@ -59,27 +60,26 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         foreach (var fragment in attachedFragments)
         {
             fragment.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            if (fragment.FragmentData.IsVip) VipCostTutorial.Appear();
         }
 
         if (attachedFragments.Length < 3) allThemesCorrect = false;
-        else
-            foreach (var fragment in attachedFragments)
+
+        foreach (var fragment in attachedFragments)
+        {
+            if (fragment.FragmentData.Theme != holder.NewspaperData.Theme) { allThemesCorrect = false; break; }
+            if (fragment.FragmentData.IsVip)
             {
-                if (fragment.FragmentData.Theme != holder.NewspaperData.Theme) { allThemesCorrect = false; break; }
-                if (fragment.FragmentData.IsVip)
-                {
-                    hasVipNews = true;
-                    PlayerValues.Values.Money -= VipCost;
-                    VipExpenditure.Expenditure += VipCost;
-                    TotalExpenditure.Expenditure -= VipCost;
-                }
+                hasVipNews = true;
+                PlayerValues.Values.Money -= VipCost;
+                VipExpenditure.Expenditure += VipCost;
+                TotalExpenditure.Expenditure -= VipCost;
             }
+        }
 
         if (!allThemesCorrect) { holder.Cost = LowQualityCost; LowQualityPopupTutorial.Appear(); }
         else if (!hasVipNews) holder.Cost = MidQualityCost;
         else holder.Cost = HighQualityCost;
-
-        if (PlayerValues.Values.Money < 0) return;
 
         eventData.pointerDrag.GetComponent<CanvasGroup>().blocksRaycasts = false;
         eventData.pointerDrag.GetComponent<CanvasGroup>().alpha = 1f;

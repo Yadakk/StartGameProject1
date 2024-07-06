@@ -20,7 +20,7 @@ public class GameSaver : MonoBehaviour
     public void Save()
     {
         if(!InjectData) return;
-        Data = new(PlayerValues.Values.MoneyForSaving, GameFlower.CurrentDay);
+        Data = new(PlayerValues.Values.Money, GameFlower.CurrentDay);
         JsonSaver.Save(Data, _filePath);
     }
 
