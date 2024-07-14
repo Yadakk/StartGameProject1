@@ -522,7 +522,7 @@ MonoBehaviour:
   DayPopup: {fileID: 938216551}
   DayPopupImage: {fileID: 938216549}
   PrinterCost: 35
-  DayPopupShowTime: 3
+  DayPopupShowTime: 1
   GrandmasPerDay: 3
   MaxDays: 3
   WinSceneName: Win
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartHidden: 1
-  AnimSeconds: 2
+  AnimSeconds: 1
   AnimEaseShow: 18
   AnimEaseHide: 17
 --- !u!1 &1008035820
