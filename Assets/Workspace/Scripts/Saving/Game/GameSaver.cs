@@ -39,7 +39,6 @@ public class GameSaver : MonoBehaviour
         if (!InjectData) return;
         PlayerValues.Values.Money = Data.Money;
         GameFlower.CurrentDay = Data.Day;
-        Debug.Log(Data.Day);
         if (Data.Day > 1) GameFlower.StartDay();
         else
         {
