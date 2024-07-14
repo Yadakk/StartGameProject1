@@ -7,6 +7,7 @@ using DG.Tweening;
 public class SkipButton : MonoBehaviour
 {
     public AppearingButton AppearingButton;
+    public PopupTutorial Tutorial;
     public float AnimDuration = 1f;
 
     private Image _image;
@@ -26,6 +27,7 @@ public class SkipButton : MonoBehaviour
     {
         AppearingButton.Appear();
         Disappear();
+        Tutorial.Appear();
     }
 
     public void Appear()

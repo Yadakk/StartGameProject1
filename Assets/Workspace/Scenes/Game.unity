@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AppearingButton: {fileID: 8347953344550961199}
+  Tutorial: {fileID: 5359240896470963869}
   AnimDuration: 1
 --- !u!1001 &250989515
 PrefabInstance:
