@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using Unity.XR.GoogleVr;
 
 public class ThrowToPeople : MonoBehaviour, IDropHandler
 {
+    public GameFlower GameFlower;
     public PlayerValues PlayerValues;
     public Transform ThrowDestination;
     public ExpenditureCounter VipExpenditure;
@@ -27,6 +29,7 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
     public int VipCost = 3;
     public float AnimDuration = 1f;
 
+    private bool _grandmaFlag;
     private ThemePaperContainer[] _themePaperContainers;
 
     private void Start()
@@ -42,6 +45,12 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         PopupTutorialOld2.Disappear();
         PopupTutorialOld3.Disappear();
         PopupTutorial.Appear();
+
+        if (GameFlower.CurrentDay == 1 && !_grandmaFlag)
+        {
+            GameFlower.GenerateGrandma();
+            _grandmaFlag = true;
+        }
 
         ThemePaperContainer selectedContainer = null;
         AudioSource.PlayOneShot(AudioSource.clip);

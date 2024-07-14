@@ -52,12 +52,11 @@ public class NewspaperGenerator : MonoBehaviour
         var themedPapers = NewspaperDatas.Where(data => data.Theme == selectedTheme).ToList();
         holder.NewspaperData = themedPapers[Random.Range(0, themedPapers.Count)];
 
-        paper.transform.SetParent(Bounds, true);
-
-        rect.sizeDelta *= holder.NewspaperData.Sprite.bounds.extents;
-
         FragmentGenerator.CurrentPaper = holder;
         FragmentGenerator.GenerateMany();
+
+        paper.transform.SetParent(Bounds, true);
+        rect.sizeDelta *= holder.NewspaperData.Sprite.bounds.extents;
 
         Tweener tween = paper.transform.DOLocalMove(Destination.localPosition, AnimSeconds).SetEase(Ease.OutCirc);
     }

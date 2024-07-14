@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using TMPro;
 
 public class UpDownTween : MonoBehaviour
 {
@@ -21,5 +22,10 @@ public class UpDownTween : MonoBehaviour
         _mySequence = DOTween.Sequence().SetLoops(-1, LoopType.Yoyo);
         _mySequence.Append(transform.DOLocalMoveY(transform.localPosition.y + Offset, MoveSeconds).SetEase(Ease.InOutSine));
         _mySequence.Play();
+    }
+
+    private void OnDestroy()
+    {
+        _mySequence.Kill();
     }
 }

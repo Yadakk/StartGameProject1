@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameSaver : MonoBehaviour
 {
+    public AppearingButton Transition;
     public PlayerValues PlayerValues;
     public GameFlower GameFlower;
     public PopupTutorial FirstDayPopup;
@@ -30,7 +31,7 @@ public class GameSaver : MonoBehaviour
     {
         if (!JsonSaver.Load<GameSave>(_filePath, out var loadedObject))
         {
-            if (InjectData) FirstDayPopup.Appear(); 
+            if (InjectData) FirstDayEvents();
             return;
         }
 
@@ -38,8 +39,17 @@ public class GameSaver : MonoBehaviour
         if (!InjectData) return;
         PlayerValues.Values.Money = Data.Money;
         GameFlower.CurrentDay = Data.Day;
-
+        Debug.Log(Data.Day);
         if (Data.Day > 1) GameFlower.StartDay();
-        else FirstDayPopup.Appear();
+        else
+        {
+            FirstDayEvents();
+        }
+    }
+
+    private void FirstDayEvents()
+    {
+        FirstDayPopup.Appear();
+        Transition.Image.color = Color.clear;
     }
 }

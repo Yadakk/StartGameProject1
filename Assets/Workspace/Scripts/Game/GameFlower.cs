@@ -9,6 +9,7 @@ public class GameFlower : MonoBehaviour
 {
     public PlayerValues PlayerValues;
     public GameSaver Saver;
+    public AppearingButton Transition;
     public GrandmaGenerator Generator;
     public OpenCloseWindow ResultsWindow;
     public GameObject ThemePaperContainerParent;
@@ -34,6 +35,7 @@ public class GameFlower : MonoBehaviour
     public int CurrentDay { get; set; } = 1;
 
     private int _grandmasToGo;
+    public int GrandmasToGo { get => _grandmasToGo; private set => _grandmasToGo = value; }
 
     private void Start()
     {
@@ -47,12 +49,17 @@ public class GameFlower : MonoBehaviour
         IncomeExpenditure.Expenditure = 0;
         TotalExpenditure.Expenditure = 0;
 
-        _grandmasToGo = GrandmasPerDay;
-        GenerateGrandma();
+        GrandmasToGo = GrandmasPerDay;
         OnNewDay.Invoke();
         NewspaperGenerator.StartPrinting();
 
         if (CurrentDay == 2) VipTutorialStart.Appear();
+        if (CurrentDay >= 2)
+        {
+            Transition.gameObject.SetActive(true);
+            GenerateGrandma();
+        }
+        else Generator.GenerateRentman();
 
         DayPopupImage.sprite = DaySprites[CurrentDay - 1];
         DayPopup.Show(() => StartCoroutine(ShowDayPopup()));
@@ -64,11 +71,11 @@ public class GameFlower : MonoBehaviour
         DayPopup.Hide();
     }
 
-    private void GenerateGrandma()
+    public void GenerateGrandma()
     {
-        if (_grandmasToGo == 0) { EndDay(); return; }
+        if (GrandmasToGo == 0) { EndDay(); return; }
         var grandma = Generator.Generate();
-        _grandmasToGo--;
+        GrandmasToGo--;
         grandma.GetComponent<GrandmaMoveToPosition>().OnGrandmaExit.AddListener(GenerateGrandma);
     }
 

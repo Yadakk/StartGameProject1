@@ -12,6 +12,11 @@ public class PopupTween : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
+
     public void Appear()
     {
         transform.DOScale(Vector3.one, Duration).SetEase(Ease.OutElastic);
