@@ -92,7 +92,7 @@ public class CounterChangeDisplay : MonoBehaviour
         _displayedValue = 0;
         TweenToAnchored.ResetPos();
         MoneyCounter.UpdateText();
-        MoneyCounter.transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutExpo).OnComplete(() => MoneyCounter.transform.DOScale(1f, 0.2f).SetEase(Ease.InExpo));
+        MoneyCounter.transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutSine).OnComplete(() => MoneyCounter.transform.DOScale(1f, 0.2f).SetEase(Ease.InSine));
 
         _isShown = false;
         _isDisappearing = false;

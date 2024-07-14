@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc8aeeaecc2c9949a07b4d12c757f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrandmaData: {fileID: 11400000, guid: e59e5c6e6cff4134bb08863df39b539d, type: 2}
+  GrandmaData: {fileID: 11400000, guid: eb02e72dad4343a41bc1132b476af096, type: 2}
 --- !u!114 &8844442546287425619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   SkipButton: {fileID: 0}
   AnimDuration: 4
   DisappearAnimDuration: 1
-  MessageShowTime: 5
+  MessageShowTime: 10
   DefaultSize: {x: 200, y: 200}
   DefaultSizeGrandma: {x: 533, y: 533}
 --- !u!1 &7022086806492646527
