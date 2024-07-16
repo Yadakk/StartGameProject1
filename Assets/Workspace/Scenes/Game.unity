@@ -2523,6 +2523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ba3e4ed5caffb4585a1311d966067d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bounds: {fileID: 1599080143}
   GameFlower: {fileID: 437962717}
   PlayerValues: {fileID: 437962716}
   ThrowDestination: {fileID: 7266468983523848659}

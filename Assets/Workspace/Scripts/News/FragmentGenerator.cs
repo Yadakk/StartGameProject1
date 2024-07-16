@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,13 +37,19 @@ public class FragmentGenerator : MonoBehaviour
     {
         GameObject news = Instantiate(Prefab, transform);
         var newsRect = news.GetComponent<RectTransform>();
+        var holder = news.GetComponent<FragmentDataHolder>();
+        var canvasGroup = news.GetComponent<CanvasGroup>();
+
         newsRect.sizeDelta *= fragmentData.Sprite.bounds.extents;
         newsRect.anchoredPosition = new(Random.Range(RectTransform.rect.min.x + newsRect.rect.max.x, RectTransform.rect.max.x - newsRect.rect.max.x),
                                         Random.Range(RectTransform.rect.min.y + newsRect.rect.max.y, RectTransform.rect.max.y - newsRect.rect.max.y));
 
         news.transform.SetParent(KeepZone, true);
-        var holder = news.GetComponent<FragmentDataHolder>();
         holder.FragmentData = fragmentData;
+
+        canvasGroup.blocksRaycasts = false;
+        news.transform.localScale = Vector3.zero;
+        news.transform.DOScale(Vector3.one, Random.Range(0.8f, 1.2f)).SetEase(Ease.OutSine).OnComplete(() => canvasGroup.blocksRaycasts = true);
     }
 
     public void GenerateMany()

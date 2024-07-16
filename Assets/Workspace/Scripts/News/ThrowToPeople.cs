@@ -107,5 +107,6 @@ public class ThrowToPeople : MonoBehaviour, IDropHandler
         newpaper.transform.SetParent(selectedContainer.Bounds);
 
         selectedContainer.Newspaper = newpaper;
+        Destroy(gameObject);
     }
 }

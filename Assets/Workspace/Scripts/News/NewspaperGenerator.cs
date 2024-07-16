@@ -33,6 +33,7 @@ public class NewspaperGenerator : MonoBehaviour
     public void Generate()
     {
         ClearOldFragments();
+
         if (_remainingThemes.Count == 0) return;
 
         var paper = Instantiate(Prefab, transform.position, transform.rotation, transform);
@@ -63,10 +64,18 @@ public class NewspaperGenerator : MonoBehaviour
 
     private void ClearOldFragments()
     {
+        Debug.Log(Bounds.childCount);
         for (int i = 0; i < Bounds.childCount; i++)
         {
             var child = Bounds.GetChild(i);
-            if (child.TryGetComponent<FragmentDataHolder>(out _)) Destroy(child.gameObject);
+            if (!child.TryGetComponent<FragmentDataHolder>(out _)) return;
+            var canvasGroup = child.GetComponent<CanvasGroup>();
+            canvasGroup.blocksRaycasts = false;
+            child.DOScale(Vector3.zero, Random.Range(0.8f, 1.2f)).SetEase(Ease.InSine).OnComplete(() => 
+            {
+                child.DOKill();
+                Destroy(child.gameObject);
+            });
         }
     }
 }
