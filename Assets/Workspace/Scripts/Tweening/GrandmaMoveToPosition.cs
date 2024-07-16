@@ -12,7 +12,6 @@ public class GrandmaMoveToPosition : MonoBehaviour
     public float AnimDuration;
     public float MessageShowTime;
     public Vector2 DefaultSize = new(100, 100);
-    public Vector2 DefaultSizeGrandma = new(100, 100);
 
     public readonly UnityEvent OnGrandmaExit = new();
 
@@ -25,6 +24,17 @@ public class GrandmaMoveToPosition : MonoBehaviour
             return _upDownTween;
         }
         set => _upDownTween = value;
+    }
+
+    private Animator _animator;
+    public Animator Animator
+    {
+        get
+        {
+            if (_animator == null) _animator = GetComponent<Animator>();
+            return _animator;
+        }
+        set => _animator = value;
     }
 
     private PopupTween _popupTween;
@@ -82,12 +92,12 @@ public class GrandmaMoveToPosition : MonoBehaviour
         set => _image = value;
     }
 
+    private bool _angryFlag;
+
     public void SetSprites()
     {
-        Image.sprite = Holder.GrandmaData.Sprite;
         PopupImage.sprite = Holder.GrandmaData.TextboxSprite;
         PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
-        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents / Image.sprite.bounds.extents.y;
     }
 
     public void Move(Transform destination)
@@ -132,11 +142,10 @@ public class GrandmaMoveToPosition : MonoBehaviour
 
     private void EndMessage()
     {
-        Image.sprite = Holder.GrandmaData.AngrySprite;
+        Animator.SetTrigger("GetAngry");
         PopupImage.sprite = Holder.GrandmaData.AngryTextboxSprite;
 
         PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
-        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents / Image.sprite.bounds.extents.y;
 
         PopupTween.Appear(() => StartCoroutine(EndMessageDisappear()));
     }
@@ -151,5 +160,11 @@ public class GrandmaMoveToPosition : MonoBehaviour
     {
         MoveToEnd(Generator.Exit);
         UpDownTween.Play();
+    }
+
+    public void OnAngryIdle()
+    {
+        if (_angryFlag) return;
+        _angryFlag = true;
     }
 }

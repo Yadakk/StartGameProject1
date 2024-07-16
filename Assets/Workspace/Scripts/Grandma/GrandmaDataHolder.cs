@@ -7,11 +7,24 @@ public class GrandmaDataHolder : MonoBehaviour
 {
     public GrandmaData GrandmaData;
 
-    private Image _image;
+    private Animator _animator;
+    public Animator Animator
+    {
+        get
+        {
+            if (_animator == null) _animator = GetComponent<Animator>();
+            return _animator;
+        }
+        set => _animator = value;
+    }
 
     private void Start()
     {
-        _image = GetComponent<Image>();
-        _image.sprite = GrandmaData.Sprite;
+        SetAnimator();
+    }
+
+    public void SetAnimator()
+    {
+        Animator.runtimeAnimatorController = GrandmaData.AnimatorController;
     }
 }

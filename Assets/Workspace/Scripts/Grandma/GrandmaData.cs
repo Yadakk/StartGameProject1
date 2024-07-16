@@ -5,8 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New GrandmaData", menuName = "ScriptableObjects/GrandmaData", order = 3)]
 public class GrandmaData : ScriptableObject
 {
-    public Sprite Sprite;
-    public Sprite AngrySprite;
+    public RuntimeAnimatorController AnimatorController;
     public Sprite TextboxSprite;
     public Sprite AngryTextboxSprite;
     public Theme Theme;

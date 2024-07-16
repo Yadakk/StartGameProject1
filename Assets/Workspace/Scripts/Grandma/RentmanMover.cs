@@ -14,7 +14,6 @@ public class RentmanMover : MonoBehaviour
     public float DisappearAnimDuration;
     public float MessageShowTime;
     public Vector2 DefaultSize = new(100, 100);
-    public Vector2 DefaultSizeGrandma = new(100, 100);
 
     private UpDownTween _upDownTween;
     public UpDownTween UpDownTween
@@ -89,10 +88,8 @@ public class RentmanMover : MonoBehaviour
 
     public void SetSprites()
     {
-        Image.sprite = Holder.GrandmaData.Sprite;
         PopupImage.sprite = Holder.GrandmaData.TextboxSprite;
         PopupRect.sizeDelta = DefaultSize * PopupImage.sprite.bounds.extents;
-        Rect.sizeDelta = DefaultSizeGrandma * Image.sprite.bounds.extents / Image.sprite.bounds.extents.y;
     }
 
     public void Move(Transform destination)

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb5f5f7c66443b44ab66afa2d4fa07d, type: 3}
   m_Name: FashionGrandma 2
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 14dfff58fb233974fa7964202278a40b, type: 3}
-  AngrySprite: {fileID: 21300000, guid: 33bfcb8bfd6d74344a9017217aafb5d8, type: 3}
+  AnimatorController: {fileID: 9100000, guid: 7e9090ced60746441ad33b54dd004d6b, type: 2}
   TextboxSprite: {fileID: 21300000, guid: 2d0edd7c13dbba541b71256ad5f74625, type: 3}
   AngryTextboxSprite: {fileID: 21300000, guid: f1989bdd66e506d44bf394159da65805, type: 3}
-  Theme: 2
+  Theme: 0
+  DownOffset: 200

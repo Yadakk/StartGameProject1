@@ -64,7 +64,6 @@ public class NewspaperGenerator : MonoBehaviour
 
     private void ClearOldFragments()
     {
-        Debug.Log(Bounds.childCount);
         for (int i = 0; i < Bounds.childCount; i++)
         {
             var child = Bounds.GetChild(i);
