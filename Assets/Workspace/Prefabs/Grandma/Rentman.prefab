@@ -89,7 +89,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -266.5}
-  m_SizeDelta: {x: 588, y: 680}
+  m_SizeDelta: {x: 588, y: 666}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8213702436445764475
 CanvasRenderer:
@@ -174,7 +174,6 @@ MonoBehaviour:
   DisappearAnimDuration: 1
   MessageShowTime: 10
   DefaultSize: {x: 200, y: 200}
-  DefaultSizeGrandma: {x: 533, y: 533}
 --- !u!95 &4371480223965482608
 Animator:
   serializedVersion: 5
