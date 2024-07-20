@@ -8,85 +8,80 @@ using UnityEngine.UI;
 
 public static class SpriteAnimatorEditor
 {
-    [MenuItem("Assets/Assign sprites from folder", true)]
-    private static bool AssignSpritesFromFolderValidation()
+    #region AssignToImage
+    [MenuItem("Assets/Animate sprites from folder/To Image", true)]
+    private static bool AnimateSpritesFromFolderToImageValidation()
     {
         return Selection.activeObject is AnimationClip;
     }
 
-    [MenuItem("Assets/Assign sprites from folder")]
-    private static void AssignSpritesFromFolder()
+    [MenuItem("Assets/Animate sprites from folder/To Image")]
+    private static void AnimateSpritesFromFolderToImage()
     {
-        AnimationClip clip = Selection.activeObject as AnimationClip;
-        var clipPath = AssetDatabase.GetAssetPath(clip);
-        var defaultPath = Path.GetDirectoryName(Path.GetFullPath(Path.Combine(Application.dataPath, @"../")) + clipPath);
-        string texturesPath = EditorUtility.OpenFolderPanel("Select image folder", defaultPath, "");
-        if (string.IsNullOrEmpty(texturesPath)) return;
+        FillAnimationClipWithSpritesFromFolder(new EditorCurveBinding().BindToImageSprite());
+    }
+    #endregion
 
-        texturesPath = AbsoluteToRelative(texturesPath);
-
-        var sprites = GetAssetsFromFolder<Sprite>(texturesPath).ToArray();
-        clip.frameRate = sprites.Length;
-
-        EditorCurveBinding spriteBinding = CreateSpriteBinding();
-
-        ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[sprites.Length];
-        spriteKeyFrames = SetSpriteKeyframes(sprites, spriteKeyFrames, clip.frameRate);
-        AnimationUtility.SetObjectReferenceCurve(clip, spriteBinding, spriteKeyFrames);
-
-        SaveAssets();
+    #region AssignToSpriteRenderer
+    [MenuItem("Assets/Animate sprites from folder/To SpriteRenderer", true)]
+    private static bool AnimateSpritesFromFolderToSpriteRendererValidation()
+    {
+        return Selection.activeObject is AnimationClip;
     }
 
-    private static string AbsoluteToRelative(string path)
+    [MenuItem("Assets/Animate sprites from folder/To SpriteRenderer")]
+    private static void AnimateSpritesFromFolderToSpriteRenderer()
     {
-        if (path.StartsWith(Application.dataPath))
-            path = "Assets" + path[Application.dataPath.Length..];
+        FillAnimationClipWithSpritesFromFolder(new EditorCurveBinding().BindToSpriteRendererSprite());
+    }
+    #endregion
 
-        return path;
+    #region CalculationMethods
+    private static void FillAnimationClipWithSpritesFromFolder(EditorCurveBinding curveBinding)
+    {
+        GetAnimationClip(out var selectedAnimationClip, out var selectedAnimationClipPathRelative);
+
+        string spriteFolderPathAbsolute = GetSpriteFolderPath(selectedAnimationClipPathRelative);
+        if (string.IsNullOrEmpty(spriteFolderPathAbsolute)) return;
+
+        Sprite[] sprites = GetSpritesFromFolder(spriteFolderPathAbsolute);
+
+        selectedAnimationClip.frameRate = sprites.Length;
+        BindSpritesToAnimationClip(selectedAnimationClip, sprites, curveBinding);
+
+        SaveAndRefreshDatabase();
     }
 
-    private static void SaveAssets()
+    private static void BindSpritesToAnimationClip(AnimationClip selectedAnimationClip, Sprite[] sprites, EditorCurveBinding curveBinding)
+    {
+        ObjectReferenceKeyframe[] spriteKeyFrames = sprites.ToObjectKeyframes(sprites.Length);
+        AnimationUtility.SetObjectReferenceCurve(selectedAnimationClip, curveBinding, spriteKeyFrames);
+    }
+
+    private static void SaveAndRefreshDatabase()
     {
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
 
-    private static ObjectReferenceKeyframe[] 
-    SetSpriteKeyframes(Sprite[] sprites, ObjectReferenceKeyframe[] spriteKeyFrames, float frameRate)
+    private static Sprite[] GetSpritesFromFolder(string spriteFolderPathAbsolute)
     {
-        for (int i = 0; i < spriteKeyFrames.Length; i++)
-        {
-            spriteKeyFrames[i] = new ObjectReferenceKeyframe
-            {
-                time = i / frameRate,
-                value = sprites[i]
-            };
-        }
-
-        return spriteKeyFrames;
+        string spriteFolderPathRelative = spriteFolderPathAbsolute.AbsoluteToRelativePath();
+        Sprite[] sprites = spriteFolderPathRelative.GetAssetsFromFolder<Sprite>().ToArray();
+        return sprites;
     }
 
-    private static EditorCurveBinding CreateSpriteBinding()
+    private static string GetSpriteFolderPath(string selectedAnimationClipPathRelative)
     {
-        return new()
-        {
-            type = typeof(Image),
-            path = "",
-            propertyName = "m_Sprite"
-        };
+        string defaultFolderPanelPath = selectedAnimationClipPathRelative.RelativeToAbsolutePath();
+        string spriteFolderPathAbsolute = EditorUtility.OpenFolderPanel("Select image folder", defaultFolderPanelPath, "");
+        return spriteFolderPathAbsolute;
     }
 
-    private static T[] GetAssetsFromFolder<T>(string path) where T : Object
+    private static void GetAnimationClip(out AnimationClip selectedAnimationClip, out string selectedAnimationClipPathRelative)
     {
-        string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name, new string[] { path });
-        List<T> matchingAssets = new();
-
-        foreach (var guid in guids)
-        {
-            var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            matchingAssets.Add(AssetDatabase.LoadAssetAtPath<T>(assetPath));
-        }
-
-        return matchingAssets.ToArray();
+        selectedAnimationClip = Selection.activeObject as AnimationClip;
+        selectedAnimationClipPathRelative = AssetDatabase.GetAssetPath(selectedAnimationClip);
     }
+    #endregion
 }
